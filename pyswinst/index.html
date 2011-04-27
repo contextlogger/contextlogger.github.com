@@ -1,0 +1,99 @@
+<?xml version="1.0"
+      encoding="utf-8"
+?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/><link rel="shortcut icon" href="http://www.hiit.fi/sites/all/themes/hiit/favicon.ico" type="image/x-icon" /><link rel="stylesheet" href="hiit.css" type="text/css" />
+<title>pyswinst for Python for S60</title>
+<meta name="generator" content="http://txt2tags.sf.net" />
+</head>
+<body><table class="navi"><tr><th>Go to</th></td><tr><td><a href="http://contextlogger.org/">CL2</a></td></tr><tr><td><a href="http://hiit.fi/uix/">UIx</a></td></tr><tr><td><a href="http://hiit.fi/">HIIT</a></td></tr></table>
+<div align="center">
+<h1>pyswinst for Python for S60</h1>
+<h3>Wed Apr 27 12:19:03 2011</h3>
+</div>
+
+
+<hr class="light" />
+
+  <ol>
+  <li><a href="#toc1">Introduction</a>
+  </li>
+  <li><a href="#toc2">Status</a>
+  </li>
+  <li><a href="#toc3">Examples</a>
+  </li>
+  <li><a href="#toc4">License</a>
+  </li>
+  <li><a href="#toc5">Download</a>
+  </li>
+  <li><a href="#toc6">Dependencies</a>
+  </li>
+  <li><a href="#toc7">Acknowledgements</a>
+  </li>
+  </ol>
+
+
+<hr class="light" />
+
+<a id="toc1" name="toc1"></a>
+<h1>1. Introduction</h1>
+<p>
+The <code>pyswinst</code> <a href="https://garage.maemo.org/projects/pys60">Python for S60</a> extension supports programmatic, non-interactive software installation. Both SIS files and JAR files should be installable, but we have only tried SIS file installation.
+</p>
+<p>
+The present version uses a mostly fixed set of installation options, of which particularly noteworthy are that installation is always to the <code>E:</code> drive (tough luck if the drive does not exist), and that upgrades (i.e., replacing software that is already installed) are allowed.
+</p>
+<p>
+There are two exceptions in that the <code>iUntrusted</code> and <code>iCapabilities</code> options may be specified as keyword arguments (named <code>untrusted</code> and <code>capabilities</code>, respectively) to the <code>install</code> method. As far as development tools go you probably want to have both of these options be <code>True</code> (which is the default), but on Symbian^3 this <a href="http://developer.symbian.org/forum/showthread.php?t=7428">requires</a> the <code>AllFiles</code> capability, and hence you may have to specify both as <code>False</code> instead on Symbian^3, and stick to installing trusted (not self-signed) software.
+</p>
+<p>
+Both PyS60 v1.4.x and v2 series are supported by this extension.
+</p>
+<a id="toc2" name="toc2"></a>
+<h1>2. Status</h1>
+<p>
+Stable.
+</p>
+<a id="toc3" name="toc3"></a>
+<h1>3. Examples</h1>
+<p>
+The <a href="https://github.com/contextlogger/pyswinst/tree/master/test-programs">programs used to test <code>pyswinst</code></a> also serve as example programs. There is no API documentation available for <code>pyswinst</code>. The API is rather simple, though, and the examples should be sufficient to cover it.
+</p>
+<p>
+Note that <code>auto_installer.py</code> depends on the <code>fnmatch.py</code> and <code>miso</code> libraries, of which neither is included in Nokia's Python for S60 distributions. <code>fnmatch.py</code> can be acquired from other, compatible Python distributions, and we have also <a href="http://new.contextlogger.org/fnmatch-python/">packaged it</a> as a SIS file. Miso downloads are available from the <a href="http://www.hiit.fi/files/fi/da/miso/utils/web/">Miso homepage</a>.
+</p>
+<a id="toc4" name="toc4"></a>
+<h1>4. License</h1>
+<p>
+For the license under which the software is released, see the <a href="https://github.com/contextlogger/pyswinst/blob/master/doc/license.txt">license.txt</a> file.
+</p>
+<a id="toc5" name="toc5"></a>
+<h1>5. Download</h1>
+<p>
+A <a href="download/">collection of release builds</a> is available. The <code>py1</code> builds are for PyS60 1.4.5, and the <code>py2</code> builds are for the 1.9.x/2.0.0 series. The <code>self</code> variant is self-signed, with maximum self-signable capabilities. The <code>dev</code> variant is signable with Symbian's Open Signed Online or with a developer certificate, and has maximum capabilities allowed by Open Signed Online. Note that in this case the self-signed version is rather pointless, as the TrustedUI capability is required for "silent" software installation.
+</p>
+<p>
+You may or may not find the <a href="https://github.com/contextlogger/pyswinst/commits/master/">changelog</a> useful in trying to determine what has changed between releases.
+</p>
+<p>
+A <a href="http://git-scm.com/">Git</a> repository of the source code (with change history) is also available, hosted on GitHub at <a href="http://github.com/contextlogger/pynewfile">http://github.com/contextlogger/pynewfile</a>.
+</p>
+<a id="toc6" name="toc6"></a>
+<h1>6. Dependencies</h1>
+<p>
+The software runs on some S60 3rd and 5th Edition and Symbian^3 devices, but we do not know on which ones exactly. The software accesses the <a href="http://wiki.forum.nokia.com/index.php/SW_Installer_Launcher_API">SW Installer Launcher</a> ABI, and there are apparently no guarantees as to the binary compatibility for that ABI, neither "neither between platform versions or within a platform version".
+</p>
+<a id="toc7" name="toc7"></a>
+<h1>7. Acknowledgements</h1>
+<p>
+The library was created at <a href="http://www.hiit.fi/">HIIT</a>.
+</p>
+<hr class="light" />
+<p>
+<a href="http://hiit.fi/u/hasu/">Tero Hasu</a>
+</p>
+
+<!-- xhtml code generated by txt2tags 2.5 (http://txt2tags.sf.net) -->
+<!-- cmdline: txt2tags -\-target xhtml -\-infile web/index.txt2tags.txt -\-outfile web/index.html -\-encoding utf-8 -\-verbose -C web/config.t2t -->
+</body></html>
