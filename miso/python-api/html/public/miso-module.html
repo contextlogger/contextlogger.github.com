@@ -1,0 +1,547 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>miso</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css"></link>
+</head>
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+
+<!-- =========== START OF NAVBAR =========== -->
+<table class="navbar" border="0" width="100%" cellpadding="0" bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="center">
+    <th bgcolor="#70b0f0" class="navselect">&nbsp;&nbsp;&nbsp;Home&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="trees.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="indices.html">Index</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <font size="-1"><b class="breadcrumbs">
+        Module&nbsp;miso
+      </b></font></br>
+    </td>
+    <td><table cellpadding="0" cellspacing="0">
+      <tr><td align="right"><font size="-2">[<a href="../private/miso-module.html">show&nbsp;private</a>&nbsp;|&nbsp;hide&nbsp;private]</font></td></tr>
+      <tr><td align="right"><font size="-2">[<a href="frames.html"target="_top">frames</a>&nbsp;|&nbsp;<a href="miso-module.html" target="_top">no&nbsp;frames</a>]</font></td></tr>
+    </table></td>
+</tr></table>
+
+<!-- =========== START OF MODULE DESCRIPTION =========== -->
+<h2 class="module">Module miso</h2>
+
+
+<!-- =========== START OF CLASSES =========== -->
+<table class="summary" border="1" cellpadding="3" cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="summary">
+  <th colspan="2">Classes</th></tr>
+<tr><td width="15%">
+  <b><a href="miso.FsNotifyChange-class.html"><code>FsNotifyChange</code></a></b></td>
+  <td>&nbsp;</td></tr>
+</table><br />
+
+
+<!-- =========== START OF FUNCTION SUMMARY =========== -->
+<table class="summary" border="1" cellpadding="3" cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="summary">
+  <th colspan="2">Function Summary</th></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="miso-module.html#alloc_heap_cell" class="summary-sig-name"><code>alloc_heap_cell</code></a>(<span class=summary-sig-arg>size</span>)</span></code>
+<br />
+Allocates a cell of at least the specified size from the current 
+thread's heap.</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="miso-module.html#alloc_heap_cells_size" class="summary-sig-name"><code>alloc_heap_cells_size</code></a>()</span></code>
+<br />
+Returns the total size of the cells allocated on the calling thread's 
+heap.</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="miso-module.html#check_heap" class="summary-sig-name"><code>check_heap</code></a>()</span></code>
+<br />
+Checks the validity of the calling threads heap, raising a panic if 
+any corruption is found.</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="miso-module.html#compress_all_heaps" class="summary-sig-name"><code>compress_all_heaps</code></a>()</span></code>
+<br />
+Compresses memory chunks containing heaps.</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="miso-module.html#create_drive_subst" class="summary-sig-name"><code>create_drive_subst</code></a>(<span class=summary-sig-arg>drive_num</span>,
+          <span class=summary-sig-arg>path</span>)</span></code>
+<br />
+Assigns a path to a drive letter.</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="miso-module.html#free_heap_cell" class="summary-sig-name"><code>free_heap_cell</code></a>(<span class=summary-sig-arg>address</span>)</span></code>
+<br />
+Frees the heap cell at the specified address.</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="miso-module.html#get_hal_attr" class="summary-sig-name"><code>get_hal_attr</code></a>(<span class=summary-sig-arg>attr</span>)</span></code>
+<br />
+Gets the value of the specified HAL attribute.</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="miso-module.html#get_process_priority" class="summary-sig-name"><code>get_process_priority</code></a>()</span></code>
+<br />
+The return values to expect are: EPriorityLow (150), 
+EPriorityBackground (250), EPriorityForeground (350), EPriorityHigh 
+(450), EPriorityWindowServer (650), EPriorityFileServer (750), 
+EPriorityRealTimeServer (850), EPrioritySupervisor (950).</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="miso-module.html#get_subst_path" class="summary-sig-name"><code>get_subst_path</code></a>(<span class=summary-sig-arg>drive_num</span>)</span></code>
+<br />
+Returns the path assigned to the specified substed drive.</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="miso-module.html#get_thread_priority" class="summary-sig-name"><code>get_thread_priority</code></a>()</span></code>
+<br />
+The return values to expect are: EPriorityNull (-30, cannot be set by 
+user code), EPriorityMuchLess (-20), EPriorityLess (-10), EPriorityNormal 
+(0), EPriorityMore (10), EPriorityMuchMore (20), EPriorityRealTime (30), 
+EPriorityAbsoluteVeryLow (100), EPriorityAbsoluteLow (200), 
+EPriorityAbsoluteBackground (300), EPriorityAbsoluteForeground (400), 
+EPriorityAbsoluteHigh (500, highest possible apart from the kernel).</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="miso-module.html#have_process" class="summary-sig-name"><code>have_process</code></a>(<span class=summary-sig-arg>spec</span>)</span></code>
+<br />
+Returns a true or false value indicating whether there are any 
+processes running that match the given process name pattern.</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="miso-module.html#heap_base_address" class="summary-sig-name"><code>heap_base_address</code></a>()</span></code>
+<br />
+Returns the base address of the heap of the running thread as an 
+integer.</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="miso-module.html#heap_biggest_avail" class="summary-sig-name"><code>heap_biggest_avail</code></a>()</span></code>
+<br />
+Returns the space available in the largest free block an the calling 
+thread's heap.</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="miso-module.html#heap_total_avail" class="summary-sig-name"><code>heap_total_avail</code></a>()</span></code>
+<br />
+Returns the total free space available on the calling thread's 
+heap.</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="miso-module.html#kill_process" class="summary-sig-name"><code>kill_process</code></a>(<span class=summary-sig-arg>spec</span>,
+          <span class=summary-sig-arg>reason</span>)</span></code>
+<br />
+Ends the specified process(es).</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="miso-module.html#local_bt_address" class="summary-sig-name"><code>local_bt_address</code></a>()</span></code>
+<br />
+Returns the local Bluetooth address.</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="miso-module.html#local_bt_name" class="summary-sig-name"><code>local_bt_name</code></a>()</span></code>
+<br />
+Returns the local Bluetooth name.</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="miso-module.html#miso_version" class="summary-sig-name"><code>miso_version</code></a>()</span></code>
+<br />
+Returns the version number of this library, as an decimal integer of 
+the form xyy, where x is the major version, and yy is the minor 
+version.</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="miso-module.html#num_alloc_heap_cells" class="summary-sig-name"><code>num_alloc_heap_cells</code></a>()</span></code>
+<br />
+Returns the total number of cells allocated on the calling thread's 
+heap.</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="miso-module.html#num_free_heap_cells" class="summary-sig-name"><code>num_free_heap_cells</code></a>()</span></code>
+<br />
+Returns the total number of free cells on the calling thread's 
+heap.</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="miso-module.html#reset_inactivity_time" class="summary-sig-name"><code>reset_inactivity_time</code></a>()</span></code>
+<br />
+Resets all inactivity timers.</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="miso-module.html#restart_phone" class="summary-sig-name"><code>restart_phone</code></a>()</span></code>
+<br />
+Restarts the device.</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="miso-module.html#set_hal_attr" class="summary-sig-name"><code>set_hal_attr</code></a>(<span class=summary-sig-arg>attr</span>,
+          <span class=summary-sig-arg>value</span>)</span></code>
+<br />
+Sets the specified HAL attribute to the specified value.</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="miso-module.html#set_process_priority" class="summary-sig-name"><code>set_process_priority</code></a>(<span class=summary-sig-arg>priority</span>)</span></code>
+<br />
+priority:: An integer value.</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="miso-module.html#set_thread_priority" class="summary-sig-name"><code>set_thread_priority</code></a>(<span class=summary-sig-arg>priority</span>)</span></code>
+<br />
+priority:: An integer value.</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="miso-module.html#stack_info" class="summary-sig-name"><code>stack_info</code></a>()</span></code>
+<br />
+Returns a tuple of three integers (free, used, total).</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="miso-module.html#tick_count" class="summary-sig-name"><code>tick_count</code></a>()</span></code>
+<br />
+Returns the current tick count.</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="miso-module.html#vibrate" class="summary-sig-name"><code>vibrate</code></a>(<span class=summary-sig-arg>duration</span>,
+          <span class=summary-sig-arg>intensity</span>)</span></code>
+<br />
+Runs the vibra motor for the specified duration of time at the 
+specified intensity.</td></tr>
+</table><br />
+
+
+<!-- =========== START OF FUNCTION DETAILS =========== -->
+<table class="details" border="1" cellpadding="3" cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="details">
+  <th colspan="2">Function Details</th></tr>
+</table>
+
+<a name="alloc_heap_cell"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">alloc_heap_cell</span>(<span class=sig-arg>size</span>)</span>
+  </h3>
+  <p>Allocates a cell of at least the specified size from the current 
+  thread's heap.</p>
+  size:: An integer value.
+  <dl><dt></dt><dd>
+  </dd></dl>
+</td></tr></table>
+
+<a name="alloc_heap_cells_size"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">alloc_heap_cells_size</span>()</span>
+  </h3>
+  Returns the total size of the cells allocated on the calling 
+  thread's heap.
+  <dl><dt></dt><dd>
+  </dd></dl>
+</td></tr></table>
+
+<a name="check_heap"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">check_heap</span>()</span>
+  </h3>
+  Checks the validity of the calling threads heap, raising a panic if 
+  any corruption is found.
+  <dl><dt></dt><dd>
+  </dd></dl>
+</td></tr></table>
+
+<a name="compress_all_heaps"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">compress_all_heaps</span>()</span>
+  </h3>
+  Compresses memory chunks containing heaps.
+  <dl><dt></dt><dd>
+  </dd></dl>
+</td></tr></table>
+
+<a name="create_drive_subst"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">create_drive_subst</span>(<span class=sig-arg>drive_num</span>,
+          <span class=sig-arg>path</span>)</span>
+  </h3>
+  <p>Assigns a path to a drive letter. To clear an existing substitution, 
+  specify an empty string as the path.</p>
+  drive_num:: An integer specifying a drive number. path:: A unicode 
+  string specifying the path.
+  <dl><dt></dt><dd>
+  </dd></dl>
+</td></tr></table>
+
+<a name="free_heap_cell"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">free_heap_cell</span>(<span class=sig-arg>address</span>)</span>
+  </h3>
+  <p>Frees the heap cell at the specified address. Passing an invalid 
+  address will result in a panic.</p>
+  address:: An integer value.
+  <dl><dt></dt><dd>
+  </dd></dl>
+</td></tr></table>
+
+<a name="get_hal_attr"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">get_hal_attr</span>(<span class=sig-arg>attr</span>)</span>
+  </h3>
+  <p>Gets the value of the specified HAL attribute.</p>
+  attr:: An integer specifying the attribute.
+  <dl><dt></dt><dd>
+  </dd></dl>
+</td></tr></table>
+
+<a name="get_process_priority"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">get_process_priority</span>()</span>
+  </h3>
+  The return values to expect are: EPriorityLow (150), 
+  EPriorityBackground (250), EPriorityForeground (350), EPriorityHigh 
+  (450), EPriorityWindowServer (650), EPriorityFileServer (750), 
+  EPriorityRealTimeServer (850), EPrioritySupervisor (950).
+  <dl><dt></dt><dd>
+  </dd></dl>
+</td></tr></table>
+
+<a name="get_subst_path"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">get_subst_path</span>(<span class=sig-arg>drive_num</span>)</span>
+  </h3>
+  <p>Returns the path assigned to the specified substed drive.</p>
+  drive_num:: An integer specifying a drive number.
+  <dl><dt></dt><dd>
+  </dd></dl>
+</td></tr></table>
+
+<a name="get_thread_priority"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">get_thread_priority</span>()</span>
+  </h3>
+  The return values to expect are: EPriorityNull (-30, cannot be set 
+  by user code), EPriorityMuchLess (-20), EPriorityLess (-10), 
+  EPriorityNormal (0), EPriorityMore (10), EPriorityMuchMore (20), 
+  EPriorityRealTime (30), EPriorityAbsoluteVeryLow (100), 
+  EPriorityAbsoluteLow (200), EPriorityAbsoluteBackground (300), 
+  EPriorityAbsoluteForeground (400), EPriorityAbsoluteHigh (500, highest 
+  possible apart from the kernel).
+  <dl><dt></dt><dd>
+  </dd></dl>
+</td></tr></table>
+
+<a name="have_process"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">have_process</span>(<span class=sig-arg>spec</span>)</span>
+  </h3>
+  Returns a true or false value indicating whether there are any 
+  processes running that match the given process name pattern. spec:: As 
+  for kill_process.
+  <dl><dt></dt><dd>
+  </dd></dl>
+</td></tr></table>
+
+<a name="heap_base_address"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">heap_base_address</span>()</span>
+  </h3>
+  Returns the base address of the heap of the running thread as an 
+  integer.
+  <dl><dt></dt><dd>
+  </dd></dl>
+</td></tr></table>
+
+<a name="heap_biggest_avail"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">heap_biggest_avail</span>()</span>
+  </h3>
+  Returns the space available in the largest free block an the calling 
+  thread's heap.
+  <dl><dt></dt><dd>
+  </dd></dl>
+</td></tr></table>
+
+<a name="heap_total_avail"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">heap_total_avail</span>()</span>
+  </h3>
+  Returns the total free space available on the calling thread's 
+  heap.
+  <dl><dt></dt><dd>
+  </dd></dl>
+</td></tr></table>
+
+<a name="kill_process"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">kill_process</span>(<span class=sig-arg>spec</span>,
+          <span class=sig-arg>reason</span>)</span>
+  </h3>
+<pre class="literalblock">
+Ends the specified process(es). On S60 3rd Edition, the PowerMgmt
+capability is required to successfully execute this function.
+spec:: A Unicode string value. A pattern to match against either
+       the process name, which would typically consist of the
+       executable name and the UID. Examples are u&quot;daemon.exe*&quot; or
+       u&quot;*[12345678]*&quot;.
+reason:: An integer value. The reason code with which the process
+         should exit.
+</pre>
+  <dl><dt></dt><dd>
+  </dd></dl>
+</td></tr></table>
+
+<a name="local_bt_address"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">local_bt_address</span>()</span>
+  </h3>
+  <p>Returns the local Bluetooth address.</p>
+  Only works with Bluetooth enabled.
+  <dl><dt></dt><dd>
+  </dd></dl>
+</td></tr></table>
+
+<a name="local_bt_name"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">local_bt_name</span>()</span>
+  </h3>
+  <p>Returns the local Bluetooth name.</p>
+  Only works with Bluetooth enabled.
+  <dl><dt></dt><dd>
+  </dd></dl>
+</td></tr></table>
+
+<a name="miso_version"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">miso_version</span>()</span>
+  </h3>
+  Returns the version number of this library, as an decimal integer of 
+  the form xyy, where x is the major version, and yy is the minor 
+  version.
+  <dl><dt></dt><dd>
+  </dd></dl>
+</td></tr></table>
+
+<a name="num_alloc_heap_cells"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">num_alloc_heap_cells</span>()</span>
+  </h3>
+  Returns the total number of cells allocated on the calling thread's 
+  heap.
+  <dl><dt></dt><dd>
+  </dd></dl>
+</td></tr></table>
+
+<a name="num_free_heap_cells"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">num_free_heap_cells</span>()</span>
+  </h3>
+  Returns the total number of free cells on the calling thread's 
+  heap.
+  <dl><dt></dt><dd>
+  </dd></dl>
+</td></tr></table>
+
+<a name="reset_inactivity_time"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">reset_inactivity_time</span>()</span>
+  </h3>
+  <p>Resets all inactivity timers. May be used to keep the backlight on, 
+  for instance.</p>
+  Deprecated. PyS60 1.3.17 onwards has reset_inactivity(), which 
+  should be used instead.
+  <dl><dt></dt><dd>
+  </dd></dl>
+</td></tr></table>
+
+<a name="restart_phone"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">restart_phone</span>()</span>
+  </h3>
+  <p>Restarts the device.</p>
+  Note that this is presently implemented using a private API, and it 
+  is unknown exactly on what devices this will work, or even how safe (to 
+  system integrity) it is to call this function even when it does work. A 
+  perhaps more common way for reboots in Python is to invoke 
+  appuifw.e32.start_exe(u'z:\sys\bin\starter.exe', ''), but again, the 
+  safety caveat applies. And reportedly starting from S60 v3.2, neither 
+  method works.
+  <dl><dt></dt><dd>
+  </dd></dl>
+</td></tr></table>
+
+<a name="set_hal_attr"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">set_hal_attr</span>(<span class=sig-arg>attr</span>,
+          <span class=sig-arg>value</span>)</span>
+  </h3>
+  Sets the specified HAL attribute to the specified value. attr:: An 
+  integer specifying the attribute. value:: An integer specifying its 
+  value.
+  <dl><dt></dt><dd>
+  </dd></dl>
+</td></tr></table>
+
+<a name="set_process_priority"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">set_process_priority</span>(<span class=sig-arg>priority</span>)</span>
+  </h3>
+<pre class="literalblock">
+priority:: An integer value. See get_process_priority()
+           documentation for a list of legal values.
+</pre>
+  <dl><dt></dt><dd>
+  </dd></dl>
+</td></tr></table>
+
+<a name="set_thread_priority"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">set_thread_priority</span>(<span class=sig-arg>priority</span>)</span>
+  </h3>
+<pre class="literalblock">
+priority:: An integer value. See get_thread_priority()
+           documentation for a list of legal values.
+</pre>
+  <dl><dt></dt><dd>
+  </dd></dl>
+</td></tr></table>
+
+<a name="stack_info"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">stack_info</span>()</span>
+  </h3>
+  <p>Returns a tuple of three integers (free, used, total). 
+  &quot;free&quot; and &quot;used&quot; indicate the amount of stack 
+  remaining and used up at the point where this function is called. 
+  &quot;total&quot; gives the total stack size allocated for the calling 
+  thread.</p>
+  Only supported on S60 3rd Edition and higher.
+  <dl><dt></dt><dd>
+  </dd></dl>
+</td></tr></table>
+
+<a name="tick_count"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">tick_count</span>()</span>
+  </h3>
+  Returns the current tick count.
+  <dl><dt></dt><dd>
+  </dd></dl>
+</td></tr></table>
+
+<a name="vibrate"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">vibrate</span>(<span class=sig-arg>duration</span>,
+          <span class=sig-arg>intensity</span>)</span>
+  </h3>
+  <p>Runs the vibra motor for the specified duration of time at the 
+  specified intensity. The duration is specified in milliseconds, and 
+  must be greater than zero. The intensity is a value between -100 and 
+  100 (inclusive), and it specifies percentage of full rotation speed. 
+  Positive and negative values cause rotation in opposite directions; a 
+  zero value indicates no rotation, and thus it makes little sense to 
+  call this function with 0 intensity argument.</p>
+  <p>Vibration will not work unless enabled in the profile. Only 
+  supported on S60 2nd Ed FP2 and higher.</p>
+  duration:: An integer. intensity:: An integer.
+  <dl><dt></dt><dd>
+  </dd></dl>
+</td></tr></table>
+<br />
+
+
+<!-- =========== START OF NAVBAR =========== -->
+<table class="navbar" border="0" width="100%" cellpadding="0" bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="center">
+    <th bgcolor="#70b0f0" class="navselect">&nbsp;&nbsp;&nbsp;Home&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="trees.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="indices.html">Index</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+  <tr>
+    <td align="left"><font size="-2">Generated by Epydoc 2.1 on Tue Apr  7 13:30:41 2009</font></td>
+    <td align="right"><a href="http://epydoc.sourceforge.net"
+                      ><font size="-2">http://epydoc.sf.net</font></a></td>
+  </tr>
+</table>
+</body>
+</html>

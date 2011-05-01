@@ -1,0 +1,228 @@
+<?xml version="1.0"
+      encoding="utf-8"
+?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/><link rel="shortcut icon" href="http://www.hiit.fi/sites/all/themes/hiit/favicon.ico" type="image/x-icon" /><link rel="stylesheet" href="hiit.css" type="text/css" />
+<title>Miso</title>
+<meta name="generator" content="http://txt2tags.sf.net" />
+</head>
+<body><table class="navi"><tr><th>Go to</th></td><tr><td><a href="http://contextlogger.org/">CL2</a></td></tr><tr><td><a href="http://pdis.hiit.fi/pdis/">PDIS</a></td></tr><tr><td><a href="http://hiit.fi/">HIIT</a></td></tr></table>
+<div align="center">
+<h1>Miso</h1>
+<h2>Sun May  1 13:39:37 2011</h2>
+</div>
+
+
+<hr class="light" />
+
+  <ol>
+  <li><a href="#toc1">Introduction</a>
+  </li>
+  <li><a href="#toc2">Status</a>
+  </li>
+  <li><a href="#toc3">Examples</a>
+  </li>
+  <li><a href="#toc4">License</a>
+  </li>
+  <li><a href="#toc5">Documentation</a>
+  </li>
+  <li><a href="#toc6">Releases</a>
+    <ul>
+    <li><a href="#toc7">6.1. Older Releases</a>
+    </li>
+    </ul>
+  </li>
+  <li><a href="#toc8">Download</a>
+  </li>
+  <li><a href="#toc9">Dependencies</a>
+  </li>
+  <li><a href="#toc10">Acknowledgements</a>
+  </li>
+  </ol>
+
+
+<hr class="light" />
+
+<p>
+<p align="center"><b>Mi</b>scellaneous <b>so</b>ftware?<br/><b>Mi</b>xture of utilities for <b>S</b>ymbian <b>O</b>S?<br/><b>&#x5473;&#x564c;</b>?<br/>Your guess is as good as ours.</p>
+</p>
+<a id="toc1" name="toc1"></a>
+<h1>1. Introduction</h1>
+<p>
+Miso is a <a href="https://garage.maemo.org/projects/pys60">Python for S60</a> utility
+library, which was developed in the <a href="http://pdis.hiit.fi/pdis/">PDIS</a>
+project at <a href="http://www.hiit.fi/">HIIT</a>. The idea of the library is to
+provide simple utility functions and classes that are easy to
+implement using native Symbian OS resources, but which would be
+difficult or impossible to implement in pure Python.
+</p>
+<p>
+The library consists of a single Symbian OS native dynamic link
+library that has a Python interface. We have tested it on S60 v2, v3 and
+v5 phones only, but don't know of any reason why it would fail to run
+on S60 v1 phones. We have found the library to build with a number of
+different Nokia S60 SDKs, using GCC, GCCE and MSVC 6.0 compilers. We
+have done both Windows and Linux hosted builds, with Nokia (on
+Windows), <a href="http://www.hiit.fi/files/fi/da/gnupoc/">GnuPoc</a> (on Linux),
+and <a href="http://www.hiit.fi/files/fi/da/sdk2unix/">sdk2unix</a> (on Linux)
+style SDK installations, respectively.
+</p>
+<a id="toc2" name="toc2"></a>
+<h1>2. Status</h1>
+<p>
+Most of the Miso functionality has been around for a long time, and is
+thus reasonably well tested. We are not, however, too worried about
+adding (or removing) features of a more experimental nature.
+</p>
+<a id="toc3" name="toc3"></a>
+<h1>3. Examples</h1>
+<p>
+The <a href="https://github.com/contextlogger/miso/tree/master/test-programs">programs used to test Miso features</a> also serve as example programs.
+</p>
+<a id="toc4" name="toc4"></a>
+<h1>4. License</h1>
+<dl>
+<dt><a href="LICENSE.txt">license</a></dt><dd>
+The license covering the software. (This file is also included in the source tree, and archived copies thereof.)
+</dd>
+</dl>
+
+<a id="toc5" name="toc5"></a>
+<h1>5. Documentation</h1>
+<p>
+API documentation for the current (possibly unstable) version of Miso is available in both <a href="python-api/html/index.html">HTML</a> and <a href="https://github.com/contextlogger/miso/tree/master/src/miso.py">Python</a> formats.
+</p>
+<a id="toc6" name="toc6"></a>
+<h1>6. Releases</h1>
+<dl>
+<dt>Version</dt><dd>
+1.99
+</dd>
+<dt>Release Date</dt><dd>
+2.6.2010
+</dd>
+<dt>Changes</dt><dd>
+Added <code>is_app_installed</code> function. There now is an S60 v5.0 build of
+the <code>py2</code> variant, which does away with an incompatibility warning during
+installation. 3rd and 5th Edition builds are now against PyS60 2.0.0.
+</dd>
+</dl>
+
+<dl>
+<dt>Version</dt><dd>
+1.98
+</dd>
+<dt>Release Date</dt><dd>
+2.10.2009
+</dd>
+<dt>Changes</dt><dd>
+Due to reported problems with <code>imp.load_dynamic</code>, now building
+without a <code>.py</code> wrapper&#8212;were not using it for pure Python
+additions anyway. S60 v3.1 and v3.2 <code>py2</code> variants now built for
+PyS60 1.9.7.
+</dd>
+</dl>
+
+<dl>
+<dt>Version</dt><dd>
+1.97
+</dd>
+<dt>Release Date</dt><dd>
+13.5.2009
+</dd>
+<dt>Changes</dt><dd>
+Now built with S60 v3.2 SDK also. (v3.2 build signed with Location capability.)
+All S60 v3.x builds now have both PyS60 1.4.5 and 1.9.4 variants.
+</dd>
+</dl>
+
+<dl>
+<dt>Version</dt><dd>
+1.96
+</dd>
+<dt>Release Date</dt><dd>
+26.2.2009
+</dd>
+<dt>Changes</dt><dd>
+Added <code>have_process</code> (cf. <code>kill_process</code>) and <code>miso_version</code> functions.
+</dd>
+</dl>
+
+<dl>
+<dt>Version</dt><dd>
+1.95
+</dd>
+<dt>Release Date</dt><dd>
+3.1.2009
+</dd>
+<dt>Changes</dt><dd>
+<code>stack_info</code> actually built in.
+</dd>
+</dl>
+
+<dl>
+<dt>Version</dt><dd>
+1.94
+</dd>
+<dt>Release Date</dt><dd>
+18.12.2008
+</dd>
+<dt>Changes</dt><dd>
+UID now of the test range, to allow for Open Signed Online use. (This probably means that v1.94 cannot be installed before uninstalling any earlier version.)
+Added <code>stack_info</code> function, inspired by <a href="http://code.google.com/p/logman-for-symbian/">LogMan</a> and its <code>RLogMan::StackInfo</code> function for logging stack usage. <code>stack_info</code> may be useful when getting KERN-EXEC 3 panics, and wondering whether there is enough stack space.
+</dd>
+</dl>
+
+<dl>
+<dt>Version</dt><dd>
+1.93
+</dd>
+<dt>Release Date</dt><dd>
+17.2.2008
+</dd>
+<dt>Changes</dt><dd>
+Using the <code>CHWRMVibra</code> API for vibra functionality in 3rd edition builds.
+Added <code>kill_process</code> function.
+Made <code>initmiso</code> the only C++ export, also for GCCE builds.
+</dd>
+</dl>
+
+<a id="toc7" name="toc7"></a>
+<h2>6.1. Older Releases</h2>
+<p>
+For binaries, source, and documentation of older releases of Miso, see the <a href="older-releases.html">older releases page</a>.
+</p>
+<a id="toc8" name="toc8"></a>
+<h1>7. Download</h1>
+<p>
+A <a href="download/">collection of release builds</a> is available. The <code>sisx</code> installation packages are signed, while the <code>sis</code> ones are not. <code>s60_3x</code> variants require signing, whereas <code>s60_1x</code> and <code>s60_2x</code> variants do not. The <code>self</code> variants have maximum self-signed capabilities, while the <code>dev</code> variants have maximum Symbian Open Signed capabilities. The <code>py1</code> variants are for Python for S60 v1.3/v1.4, while the <code>py2</code> variants are for Python for S60 v1.9/v2.0.
+</p>
+<p>
+Note that we are supplying binaries built for a number
+of different S60 platform versions, despite all S60 releases except for 3rd Edition having so far retained&#8212;to an extent&#8212;binary compatibility. While most of the utilities in the library only make use of well-established APIs, and are thus likely to run on any somewhat binary compatible S60 device regardless of which build is being used, the library does have some platform specificity, to the extent that some functionality hasn't even been implemented for all versions of the S60 platform. To reduce the likelihood of incompatibilities, you're best off installing whichever SIS file is the closest match for your phone.
+</p>
+<p>
+You may or may not find the <a href="https://github.com/contextlogger/miso/commits/master/">changelog</a> useful in trying to determine what has changed between releases.
+</p>
+<p>
+A <a href="http://git-scm.com/">Git</a> repository of the source code (with change history) is also available, hosted on GitHub at <a href="http://github.com/contextlogger/miso">http://github.com/contextlogger/miso</a>.
+</p>
+<a id="toc9" name="toc9"></a>
+<h1>8. Dependencies</h1>
+<p>
+Depends on the Python for S60 runtime. Does not depend on non-public APIs or anything exotic. Python must be installed on the target device to run this software. The appropriate Python SDK plugin(s) must be installed on the development host to build this software.
+</p>
+<a id="toc10" name="toc10"></a>
+<h1>9. Acknowledgements</h1>
+<p>
+The work was initiated in the <a href="http://pdis.hiit.fi/pdis/">PDIS</a> project at <a href="http://www.hiit.fi/">HIIT</a>.
+</p>
+<hr class="light" />
+<p>
+<a href="http://hiit.fi/u/hasu/">Tero Hasu</a>
+</p>
+
+<!-- xhtml code generated by txt2tags 2.5 (http://txt2tags.sf.net) -->
+<!-- cmdline: txt2tags -\-target xhtml -\-infile homepage/index.txt2tags.txt -\-outfile web/index.html -\-encoding utf-8 -\-verbose -C homepage/config.t2t -->
+</body></html>

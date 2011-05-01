@@ -1,0 +1,187 @@
+
+<!doctype html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module miso</title>
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>miso</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a></font></td></tr></table>
+    <p></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="miso.html#FsNotifyChange">FsNotifyChange</a>
+</font></dt></dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="FsNotifyChange">class <strong>FsNotifyChange</strong></a></font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="FsNotifyChange-__init__"><strong>__init__</strong></a>(self)</dt><dd><tt>Constructs&nbsp;an&nbsp;instance&nbsp;of&nbsp;<a href="#FsNotifyChange">FsNotifyChange</a>.&nbsp;After&nbsp;finishing<br>
+using&nbsp;a&nbsp;instance,&nbsp;you&nbsp;should&nbsp;call&nbsp;<a href="#FsNotifyChange-close">close</a>()&nbsp;on&nbsp;it&nbsp;to&nbsp;free&nbsp;the<br>
+associated&nbsp;resources.</tt></dd></dl>
+
+<dl><dt><a name="FsNotifyChange-cancel"><strong>cancel</strong></a>(self)</dt><dd><tt>Cancels&nbsp;any&nbsp;outstanding&nbsp;request.</tt></dd></dl>
+
+<dl><dt><a name="FsNotifyChange-close"><strong>close</strong></a>(self)</dt><dd><tt>Frees&nbsp;the&nbsp;resources&nbsp;associated&nbsp;with&nbsp;the&nbsp;object&nbsp;instance.&nbsp;The<br>
+object&nbsp;may&nbsp;no&nbsp;longer&nbsp;be&nbsp;used&nbsp;after&nbsp;this&nbsp;method&nbsp;has&nbsp;been<br>
+called.&nbsp;It&nbsp;is&nbsp;okay&nbsp;to&nbsp;call&nbsp;this&nbsp;method&nbsp;more&nbsp;than&nbsp;once,&nbsp;though.</tt></dd></dl>
+
+<dl><dt><a name="FsNotifyChange-notify_change"><strong>notify_change</strong></a>(self, type, callback, pathname<font color="#909090">=None</font>)</dt><dd><tt>Asynchronously&nbsp;requests&nbsp;notification&nbsp;of&nbsp;changes&nbsp;either<br>
+anywhere&nbsp;in&nbsp;the&nbsp;filesystem,&nbsp;or&nbsp;only&nbsp;in&nbsp;locations&nbsp;matching&nbsp;the<br>
+optionally&nbsp;specified&nbsp;Unicode&nbsp;pathname&nbsp;(which&nbsp;may&nbsp;contain<br>
+wildcards).<br>
+&nbsp;<br>
+The&nbsp;type&nbsp;parameter&nbsp;indicates&nbsp;the&nbsp;kind&nbsp;of&nbsp;change&nbsp;that&nbsp;should<br>
+result&nbsp;in&nbsp;notification&nbsp;--&nbsp;its&nbsp;value&nbsp;should&nbsp;be&nbsp;one&nbsp;of:<br>
+ENotifyEntry=0x00&nbsp;(directory&nbsp;addition&nbsp;or&nbsp;deletion,&nbsp;or&nbsp;change<br>
+of&nbsp;disk&nbsp;in&nbsp;a&nbsp;drive),&nbsp;ENotifyAll=0x01&nbsp;(any&nbsp;change),<br>
+ENotifyFile=0x04&nbsp;(file&nbsp;creation,&nbsp;rename,&nbsp;or&nbsp;deletion),<br>
+ENotifyDir=0x08&nbsp;(directory&nbsp;creation,&nbsp;rename,&nbsp;or&nbsp;deletion),<br>
+ENotifyAttributes=0x10&nbsp;(attribute&nbsp;change),&nbsp;ENotifyWrite=0x20<br>
+(change&nbsp;resulting&nbsp;from&nbsp;a&nbsp;write&nbsp;to&nbsp;a&nbsp;file),&nbsp;ENotifyDisk=0x40<br>
+(change&nbsp;resulting&nbsp;from&nbsp;a&nbsp;raw&nbsp;write&nbsp;to&nbsp;a&nbsp;disk).<br>
+&nbsp;<br>
+If&nbsp;the&nbsp;registration&nbsp;to&nbsp;observe&nbsp;for&nbsp;changes&nbsp;fails,&nbsp;this&nbsp;method<br>
+throws&nbsp;an&nbsp;exception,&nbsp;and&nbsp;no&nbsp;change&nbsp;notification&nbsp;will&nbsp;be<br>
+delivered.&nbsp;Otherwise&nbsp;a&nbsp;change&nbsp;notification&nbsp;request&nbsp;will&nbsp;remain<br>
+pending&nbsp;until&nbsp;either&nbsp;delivered,&nbsp;or&nbsp;cancel&nbsp;or&nbsp;close&nbsp;is&nbsp;called,<br>
+in&nbsp;which&nbsp;case&nbsp;the&nbsp;request&nbsp;gets&nbsp;cancelled&nbsp;without&nbsp;notification.<br>
+&nbsp;<br>
+Change&nbsp;notification&nbsp;is&nbsp;delivered&nbsp;by&nbsp;calling&nbsp;the&nbsp;callable<br>
+object&nbsp;provided&nbsp;as&nbsp;a&nbsp;parameter.&nbsp;It&nbsp;should&nbsp;accept&nbsp;a&nbsp;single<br>
+integer&nbsp;argument,&nbsp;which&nbsp;will&nbsp;be&nbsp;passed&nbsp;as&nbsp;0&nbsp;to&nbsp;indicate&nbsp;that&nbsp;a<br>
+filesystem&nbsp;change&nbsp;has&nbsp;taken&nbsp;place.&nbsp;If&nbsp;change&nbsp;observation<br>
+fails,&nbsp;the&nbsp;callback&nbsp;will&nbsp;be&nbsp;called&nbsp;with&nbsp;a&nbsp;negative&nbsp;argument,<br>
+which&nbsp;is&nbsp;a&nbsp;Symbian&nbsp;error&nbsp;code&nbsp;that&nbsp;should&nbsp;give&nbsp;some&nbsp;indication<br>
+of&nbsp;the&nbsp;cause&nbsp;of&nbsp;the&nbsp;failure.&nbsp;The&nbsp;callback&nbsp;is&nbsp;not&nbsp;allowed&nbsp;to<br>
+throw&nbsp;an&nbsp;exception;&nbsp;if&nbsp;it&nbsp;does,&nbsp;the&nbsp;calling&nbsp;thread&nbsp;will&nbsp;be<br>
+panicked.<br>
+&nbsp;<br>
+Only&nbsp;one&nbsp;request&nbsp;per&nbsp;<a href="#FsNotifyChange">FsNotifyChange</a>&nbsp;object&nbsp;may&nbsp;be&nbsp;outstanding<br>
+at&nbsp;any&nbsp;one&nbsp;time,&nbsp;and&nbsp;it&nbsp;is&nbsp;an&nbsp;error&nbsp;to&nbsp;call&nbsp;this&nbsp;method&nbsp;when<br>
+there&nbsp;is&nbsp;an&nbsp;outstanding&nbsp;request.&nbsp;Once&nbsp;a&nbsp;request&nbsp;completes,&nbsp;it<br>
+is&nbsp;necessary&nbsp;to&nbsp;make&nbsp;a&nbsp;new&nbsp;request&nbsp;to&nbsp;observe&nbsp;for&nbsp;subsequent<br>
+changes&nbsp;--&nbsp;it&nbsp;is&nbsp;okay&nbsp;to&nbsp;call&nbsp;this&nbsp;method&nbsp;from&nbsp;within&nbsp;the<br>
+callback.</tt></dd></dl>
+
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-alloc_heap_cell"><strong>alloc_heap_cell</strong></a>(size)</dt><dd><tt>Allocates&nbsp;a&nbsp;cell&nbsp;of&nbsp;at&nbsp;least&nbsp;the&nbsp;specified&nbsp;size&nbsp;from&nbsp;the&nbsp;current<br>
+thread's&nbsp;heap.<br>
+&nbsp;<br>
+size::&nbsp;An&nbsp;integer&nbsp;value.</tt></dd></dl>
+ <dl><dt><a name="-alloc_heap_cells_size"><strong>alloc_heap_cells_size</strong></a>()</dt><dd><tt>Returns&nbsp;the&nbsp;total&nbsp;size&nbsp;of&nbsp;the&nbsp;cells&nbsp;allocated&nbsp;on&nbsp;the&nbsp;calling<br>
+thread's&nbsp;heap.</tt></dd></dl>
+ <dl><dt><a name="-check_heap"><strong>check_heap</strong></a>()</dt><dd><tt>Checks&nbsp;the&nbsp;validity&nbsp;of&nbsp;the&nbsp;calling&nbsp;threads&nbsp;heap,&nbsp;raising&nbsp;a&nbsp;panic<br>
+if&nbsp;any&nbsp;corruption&nbsp;is&nbsp;found.</tt></dd></dl>
+ <dl><dt><a name="-compress_all_heaps"><strong>compress_all_heaps</strong></a>()</dt><dd><tt>Compresses&nbsp;memory&nbsp;chunks&nbsp;containing&nbsp;heaps.</tt></dd></dl>
+ <dl><dt><a name="-create_drive_subst"><strong>create_drive_subst</strong></a>(drive_num, path)</dt><dd><tt>Assigns&nbsp;a&nbsp;path&nbsp;to&nbsp;a&nbsp;drive&nbsp;letter.&nbsp;To&nbsp;clear&nbsp;an&nbsp;existing<br>
+substitution,&nbsp;specify&nbsp;an&nbsp;empty&nbsp;string&nbsp;as&nbsp;the&nbsp;path.<br>
+&nbsp;<br>
+drive_num::&nbsp;An&nbsp;integer&nbsp;specifying&nbsp;a&nbsp;drive&nbsp;number.<br>
+path::&nbsp;A&nbsp;unicode&nbsp;string&nbsp;specifying&nbsp;the&nbsp;path.</tt></dd></dl>
+ <dl><dt><a name="-free_heap_cell"><strong>free_heap_cell</strong></a>(address)</dt><dd><tt>Frees&nbsp;the&nbsp;heap&nbsp;cell&nbsp;at&nbsp;the&nbsp;specified&nbsp;address.&nbsp;Passing&nbsp;an&nbsp;invalid<br>
+address&nbsp;will&nbsp;result&nbsp;in&nbsp;a&nbsp;panic.<br>
+&nbsp;<br>
+address::&nbsp;An&nbsp;integer&nbsp;value.</tt></dd></dl>
+ <dl><dt><a name="-get_hal_attr"><strong>get_hal_attr</strong></a>(attr)</dt><dd><tt>Gets&nbsp;the&nbsp;value&nbsp;of&nbsp;the&nbsp;specified&nbsp;HAL&nbsp;attribute.<br>
+&nbsp;<br>
+attr::&nbsp;An&nbsp;integer&nbsp;specifying&nbsp;the&nbsp;attribute.</tt></dd></dl>
+ <dl><dt><a name="-get_process_priority"><strong>get_process_priority</strong></a>()</dt><dd><tt>The&nbsp;return&nbsp;values&nbsp;to&nbsp;expect&nbsp;are:&nbsp;EPriorityLow&nbsp;(150),<br>
+EPriorityBackground&nbsp;(250),&nbsp;EPriorityForeground&nbsp;(350),<br>
+EPriorityHigh&nbsp;(450),&nbsp;EPriorityWindowServer&nbsp;(650),<br>
+EPriorityFileServer&nbsp;(750),&nbsp;EPriorityRealTimeServer&nbsp;(850),<br>
+EPrioritySupervisor&nbsp;(950).</tt></dd></dl>
+ <dl><dt><a name="-get_subst_path"><strong>get_subst_path</strong></a>(drive_num)</dt><dd><tt>Returns&nbsp;the&nbsp;path&nbsp;assigned&nbsp;to&nbsp;the&nbsp;specified&nbsp;substed&nbsp;drive.<br>
+&nbsp;<br>
+drive_num::&nbsp;An&nbsp;integer&nbsp;specifying&nbsp;a&nbsp;drive&nbsp;number.</tt></dd></dl>
+ <dl><dt><a name="-get_thread_priority"><strong>get_thread_priority</strong></a>()</dt><dd><tt>The&nbsp;return&nbsp;values&nbsp;to&nbsp;expect&nbsp;are:&nbsp;EPriorityNull&nbsp;(-30,&nbsp;cannot&nbsp;be&nbsp;set<br>
+by&nbsp;user&nbsp;code),&nbsp;EPriorityMuchLess&nbsp;(-20),&nbsp;EPriorityLess&nbsp;(-10),<br>
+EPriorityNormal&nbsp;(0),&nbsp;EPriorityMore&nbsp;(10),&nbsp;EPriorityMuchMore&nbsp;(20),<br>
+EPriorityRealTime&nbsp;(30),&nbsp;EPriorityAbsoluteVeryLow&nbsp;(100),<br>
+EPriorityAbsoluteLow&nbsp;(200),&nbsp;EPriorityAbsoluteBackground&nbsp;(300),<br>
+EPriorityAbsoluteForeground&nbsp;(400),&nbsp;EPriorityAbsoluteHigh&nbsp;(500,<br>
+highest&nbsp;possible&nbsp;apart&nbsp;from&nbsp;the&nbsp;kernel).</tt></dd></dl>
+ <dl><dt><a name="-have_process"><strong>have_process</strong></a>(spec)</dt><dd><tt>Returns&nbsp;a&nbsp;true&nbsp;or&nbsp;false&nbsp;value&nbsp;indicating&nbsp;whether&nbsp;there&nbsp;are&nbsp;any<br>
+processes&nbsp;running&nbsp;that&nbsp;match&nbsp;the&nbsp;given&nbsp;process&nbsp;name&nbsp;pattern.<br>
+spec::&nbsp;As&nbsp;for&nbsp;kill_process.</tt></dd></dl>
+ <dl><dt><a name="-heap_base_address"><strong>heap_base_address</strong></a>()</dt><dd><tt>Returns&nbsp;the&nbsp;base&nbsp;address&nbsp;of&nbsp;the&nbsp;heap&nbsp;of&nbsp;the&nbsp;running&nbsp;thread&nbsp;as&nbsp;an<br>
+integer.</tt></dd></dl>
+ <dl><dt><a name="-heap_biggest_avail"><strong>heap_biggest_avail</strong></a>()</dt><dd><tt>Returns&nbsp;the&nbsp;space&nbsp;available&nbsp;in&nbsp;the&nbsp;largest&nbsp;free&nbsp;block&nbsp;an&nbsp;the<br>
+calling&nbsp;thread's&nbsp;heap.</tt></dd></dl>
+ <dl><dt><a name="-heap_total_avail"><strong>heap_total_avail</strong></a>()</dt><dd><tt>Returns&nbsp;the&nbsp;total&nbsp;free&nbsp;space&nbsp;available&nbsp;on&nbsp;the&nbsp;calling&nbsp;thread's<br>
+heap.</tt></dd></dl>
+ <dl><dt><a name="-kill_process"><strong>kill_process</strong></a>(spec, reason)</dt><dd><tt>Ends&nbsp;the&nbsp;specified&nbsp;process(es).&nbsp;On&nbsp;S60&nbsp;3rd&nbsp;Edition,&nbsp;the&nbsp;PowerMgmt<br>
+capability&nbsp;is&nbsp;required&nbsp;to&nbsp;successfully&nbsp;execute&nbsp;this&nbsp;function.<br>
+spec::&nbsp;A&nbsp;Unicode&nbsp;string&nbsp;value.&nbsp;A&nbsp;pattern&nbsp;to&nbsp;match&nbsp;against&nbsp;either<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;process&nbsp;name,&nbsp;which&nbsp;would&nbsp;typically&nbsp;consist&nbsp;of&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;executable&nbsp;name&nbsp;and&nbsp;the&nbsp;UID.&nbsp;Examples&nbsp;are&nbsp;u"daemon.exe*"&nbsp;or<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;u"*[12345678]*".<br>
+reason::&nbsp;An&nbsp;integer&nbsp;value.&nbsp;The&nbsp;reason&nbsp;code&nbsp;with&nbsp;which&nbsp;the&nbsp;process<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;should&nbsp;exit.</tt></dd></dl>
+ <dl><dt><a name="-local_bt_address"><strong>local_bt_address</strong></a>()</dt><dd><tt>Returns&nbsp;the&nbsp;local&nbsp;Bluetooth&nbsp;address.<br>
+&nbsp;<br>
+Only&nbsp;works&nbsp;with&nbsp;Bluetooth&nbsp;enabled.</tt></dd></dl>
+ <dl><dt><a name="-local_bt_name"><strong>local_bt_name</strong></a>()</dt><dd><tt>Returns&nbsp;the&nbsp;local&nbsp;Bluetooth&nbsp;name.<br>
+&nbsp;<br>
+Only&nbsp;works&nbsp;with&nbsp;Bluetooth&nbsp;enabled.</tt></dd></dl>
+ <dl><dt><a name="-miso_version"><strong>miso_version</strong></a>()</dt><dd><tt>Returns&nbsp;the&nbsp;version&nbsp;number&nbsp;of&nbsp;this&nbsp;library,&nbsp;as&nbsp;an&nbsp;decimal&nbsp;integer<br>
+of&nbsp;the&nbsp;form&nbsp;xyy,&nbsp;where&nbsp;x&nbsp;is&nbsp;the&nbsp;major&nbsp;version,&nbsp;and&nbsp;yy&nbsp;is&nbsp;the&nbsp;minor<br>
+version.</tt></dd></dl>
+ <dl><dt><a name="-num_alloc_heap_cells"><strong>num_alloc_heap_cells</strong></a>()</dt><dd><tt>Returns&nbsp;the&nbsp;total&nbsp;number&nbsp;of&nbsp;cells&nbsp;allocated&nbsp;on&nbsp;the&nbsp;calling<br>
+thread's&nbsp;heap.</tt></dd></dl>
+ <dl><dt><a name="-num_free_heap_cells"><strong>num_free_heap_cells</strong></a>()</dt><dd><tt>Returns&nbsp;the&nbsp;total&nbsp;number&nbsp;of&nbsp;free&nbsp;cells&nbsp;on&nbsp;the&nbsp;calling&nbsp;thread's<br>
+heap.</tt></dd></dl>
+ <dl><dt><a name="-reset_inactivity_time"><strong>reset_inactivity_time</strong></a>()</dt><dd><tt>Resets&nbsp;all&nbsp;inactivity&nbsp;timers.&nbsp;May&nbsp;be&nbsp;used&nbsp;to&nbsp;keep&nbsp;the&nbsp;backlight<br>
+on,&nbsp;for&nbsp;instance.<br>
+&nbsp;<br>
+Deprecated.&nbsp;PyS60&nbsp;1.3.17&nbsp;onwards&nbsp;has&nbsp;reset_inactivity(),&nbsp;which<br>
+should&nbsp;be&nbsp;used&nbsp;instead.</tt></dd></dl>
+ <dl><dt><a name="-restart_phone"><strong>restart_phone</strong></a>()</dt><dd><tt>Restarts&nbsp;the&nbsp;device.</tt></dd></dl>
+ <dl><dt><a name="-set_hal_attr"><strong>set_hal_attr</strong></a>(attr, value)</dt><dd><tt>Sets&nbsp;the&nbsp;specified&nbsp;HAL&nbsp;attribute&nbsp;to&nbsp;the&nbsp;specified&nbsp;value.<br>
+attr::&nbsp;An&nbsp;integer&nbsp;specifying&nbsp;the&nbsp;attribute.<br>
+value::&nbsp;An&nbsp;integer&nbsp;specifying&nbsp;its&nbsp;value.</tt></dd></dl>
+ <dl><dt><a name="-set_process_priority"><strong>set_process_priority</strong></a>(priority)</dt><dd><tt>priority::&nbsp;An&nbsp;integer&nbsp;value.&nbsp;See&nbsp;<a href="#-get_process_priority">get_process_priority</a>()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;documentation&nbsp;for&nbsp;a&nbsp;list&nbsp;of&nbsp;legal&nbsp;values.</tt></dd></dl>
+ <dl><dt><a name="-set_thread_priority"><strong>set_thread_priority</strong></a>(priority)</dt><dd><tt>priority::&nbsp;An&nbsp;integer&nbsp;value.&nbsp;See&nbsp;<a href="#-get_thread_priority">get_thread_priority</a>()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;documentation&nbsp;for&nbsp;a&nbsp;list&nbsp;of&nbsp;legal&nbsp;values.</tt></dd></dl>
+ <dl><dt><a name="-stack_info"><strong>stack_info</strong></a>()</dt><dd><tt>Returns&nbsp;a&nbsp;tuple&nbsp;of&nbsp;three&nbsp;integers&nbsp;(free,&nbsp;used,&nbsp;total).&nbsp;"free"&nbsp;and<br>
+"used"&nbsp;indicate&nbsp;the&nbsp;amount&nbsp;of&nbsp;stack&nbsp;remaining&nbsp;and&nbsp;used&nbsp;up&nbsp;at&nbsp;the<br>
+point&nbsp;where&nbsp;this&nbsp;function&nbsp;is&nbsp;called.&nbsp;"total"&nbsp;gives&nbsp;the&nbsp;total&nbsp;stack<br>
+size&nbsp;allocated&nbsp;for&nbsp;the&nbsp;calling&nbsp;thread.<br>
+&nbsp;<br>
+Only&nbsp;supported&nbsp;on&nbsp;S60&nbsp;3rd&nbsp;Edition&nbsp;and&nbsp;higher.</tt></dd></dl>
+ <dl><dt><a name="-tick_count"><strong>tick_count</strong></a>()</dt><dd><tt>Returns&nbsp;the&nbsp;current&nbsp;tick&nbsp;count.</tt></dd></dl>
+ <dl><dt><a name="-vibrate"><strong>vibrate</strong></a>(duration, intensity)</dt><dd><tt>Runs&nbsp;the&nbsp;vibra&nbsp;motor&nbsp;for&nbsp;the&nbsp;specified&nbsp;duration&nbsp;of&nbsp;time&nbsp;at&nbsp;the<br>
+specified&nbsp;intensity.&nbsp;The&nbsp;duration&nbsp;is&nbsp;specified&nbsp;in&nbsp;milliseconds,<br>
+and&nbsp;must&nbsp;be&nbsp;greater&nbsp;than&nbsp;zero.&nbsp;The&nbsp;intensity&nbsp;is&nbsp;a&nbsp;value&nbsp;between<br>
+-100&nbsp;and&nbsp;100&nbsp;(inclusive),&nbsp;and&nbsp;it&nbsp;specifies&nbsp;percentage&nbsp;of&nbsp;full<br>
+rotation&nbsp;speed.&nbsp;Positive&nbsp;and&nbsp;negative&nbsp;values&nbsp;cause&nbsp;rotation&nbsp;in<br>
+opposite&nbsp;directions;&nbsp;a&nbsp;zero&nbsp;value&nbsp;indicates&nbsp;no&nbsp;rotation,&nbsp;and&nbsp;thus<br>
+it&nbsp;makes&nbsp;little&nbsp;sense&nbsp;to&nbsp;call&nbsp;this&nbsp;function&nbsp;with&nbsp;0&nbsp;intensity<br>
+argument.<br>
+&nbsp;<br>
+Vibration&nbsp;will&nbsp;not&nbsp;work&nbsp;unless&nbsp;enabled&nbsp;in&nbsp;the&nbsp;profile.&nbsp;Only<br>
+supported&nbsp;on&nbsp;S60&nbsp;2nd&nbsp;Ed&nbsp;FP2&nbsp;and&nbsp;higher.<br>
+&nbsp;<br>
+duration::&nbsp;An&nbsp;integer.<br>
+intensity::&nbsp;An&nbsp;integer.</tt></dd></dl>
+</td></tr></table>
+</body></html>

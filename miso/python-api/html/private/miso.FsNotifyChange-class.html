@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>miso.FsNotifyChange</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css"></link>
+</head>
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+
+<!-- =========== START OF NAVBAR =========== -->
+<table class="navbar" border="0" width="100%" cellpadding="0" bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="center">
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="miso-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="trees.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="indices.html">Index</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <font size="-1"><b class="breadcrumbs">
+        <a href="miso-module.html">Module&nbsp;miso</a> ::
+        Class&nbsp;FsNotifyChange
+      </b></font></br>
+    </td>
+    <td><table cellpadding="0" cellspacing="0">
+      <tr><td align="right"><font size="-2">[show&nbsp;private&nbsp;|&nbsp;<a href="../public/miso.FsNotifyChange-class.html">hide&nbsp;private</a>]</font></td></tr>
+      <tr><td align="right"><font size="-2">[<a href="frames.html"target="_top">frames</a>&nbsp;|&nbsp;<a href="miso.FsNotifyChange-class.html" target="_top">no&nbsp;frames</a>]</font></td></tr>
+    </table></td>
+</tr></table>
+
+<!-- =========== START OF CLASS DESCRIPTION =========== -->
+<h2 class="class">Class FsNotifyChange</h2>
+
+<hr/>
+
+
+<!-- =========== START OF METHOD SUMMARY =========== -->
+<table class="summary" border="1" cellpadding="3" cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="summary">
+  <th colspan="2">Method Summary</th></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="miso.FsNotifyChange-class.html#__init__" class="summary-sig-name"><code>__init__</code></a>(<span class=summary-sig-arg>self</span>)</span></code>
+<br />
+Constructs an instance of FsNotifyChange.</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="miso.FsNotifyChange-class.html#cancel" class="summary-sig-name"><code>cancel</code></a>(<span class=summary-sig-arg>self</span>)</span></code>
+<br />
+Cancels any outstanding request.</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="miso.FsNotifyChange-class.html#close" class="summary-sig-name"><code>close</code></a>(<span class=summary-sig-arg>self</span>)</span></code>
+<br />
+Frees the resources associated with the object instance.</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="miso.FsNotifyChange-class.html#notify_change" class="summary-sig-name"><code>notify_change</code></a>(<span class=summary-sig-arg>self</span>,
+          <span class=summary-sig-arg>type</span>,
+          <span class=summary-sig-arg>callback</span>,
+          <span class=summary-sig-arg>pathname</span>)</span></code>
+<br />
+Asynchronously requests notification of changes either anywhere in the 
+filesystem, or only in locations matching the optionally specified 
+Unicode pathname (which may contain wildcards).</td></tr>
+</table><br />
+
+
+<!-- =========== START OF METHOD DETAILS =========== -->
+<table class="details" border="1" cellpadding="3" cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="details">
+  <th colspan="2">Method Details</th></tr>
+</table>
+
+<a name="__init__"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">__init__</span>(<span class=sig-arg>self</span>)</span>
+    <br /><i>(Constructor)</i>
+  </h3>
+  Constructs an instance of FsNotifyChange. After finishing using a 
+  instance, you should call close() on it to free the associated 
+  resources.
+  <dl><dt></dt><dd>
+  </dd></dl>
+</td></tr></table>
+
+<a name="cancel"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">cancel</span>(<span class=sig-arg>self</span>)</span>
+  </h3>
+  Cancels any outstanding request.
+  <dl><dt></dt><dd>
+  </dd></dl>
+</td></tr></table>
+
+<a name="close"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">close</span>(<span class=sig-arg>self</span>)</span>
+  </h3>
+  Frees the resources associated with the object instance. The object 
+  may no longer be used after this method has been called. It is okay to 
+  call this method more than once, though.
+  <dl><dt></dt><dd>
+  </dd></dl>
+</td></tr></table>
+
+<a name="notify_change"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">notify_change</span>(<span class=sig-arg>self</span>,
+          <span class=sig-arg>type</span>,
+          <span class=sig-arg>callback</span>,
+          <span class=sig-arg>pathname</span>=<span class=sig-default>None</span>)</span>
+  </h3>
+  <p>Asynchronously requests notification of changes either anywhere in 
+  the filesystem, or only in locations matching the optionally specified 
+  Unicode pathname (which may contain wildcards).</p>
+  <p>The type parameter indicates the kind of change that should result 
+  in notification -- its value should be one of: ENotifyEntry=0x00 
+  (directory addition or deletion, or change of disk in a drive), 
+  ENotifyAll=0x01 (any change), ENotifyFile=0x04 (file creation, rename, 
+  or deletion), ENotifyDir=0x08 (directory creation, rename, or 
+  deletion), ENotifyAttributes=0x10 (attribute change), ENotifyWrite=0x20 
+  (change resulting from a write to a file), ENotifyDisk=0x40 (change 
+  resulting from a raw write to a disk).</p>
+  <p>If the registration to observe for changes fails, this method throws 
+  an exception, and no change notification will be delivered. Otherwise a 
+  change notification request will remain pending until either delivered, 
+  or cancel or close is called, in which case the request gets cancelled 
+  without notification.</p>
+  <p>Change notification is delivered by calling the callable object 
+  provided as a parameter. It should accept a single integer argument, 
+  which will be passed as 0 to indicate that a filesystem change has 
+  taken place. If change observation fails, the callback will be called 
+  with a negative argument, which is a Symbian error code that should 
+  give some indication of the cause of the failure. The callback is not 
+  allowed to throw an exception; if it does, the calling thread will be 
+  panicked.</p>
+  Only one request per FsNotifyChange object may be outstanding at any 
+  one time, and it is an error to call this method when there is an 
+  outstanding request. Once a request completes, it is necessary to make 
+  a new request to observe for subsequent changes -- it is okay to call 
+  this method from within the callback.
+  <dl><dt></dt><dd>
+  </dd></dl>
+</td></tr></table>
+<br />
+
+
+<!-- =========== START OF NAVBAR =========== -->
+<table class="navbar" border="0" width="100%" cellpadding="0" bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="center">
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="miso-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="trees.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="indices.html">Index</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+  <tr>
+    <td align="left"><font size="-2">Generated by Epydoc 2.1 on Tue Apr  7 13:30:41 2009</font></td>
+    <td align="right"><a href="http://epydoc.sourceforge.net"
+                      ><font size="-2">http://epydoc.sf.net</font></a></td>
+  </tr>
+</table>
+</body>
+</html>
