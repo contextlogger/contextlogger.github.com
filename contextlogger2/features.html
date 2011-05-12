@@ -1,0 +1,326 @@
+<?xml version="1.0"
+      encoding="utf-8"
+?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/><link rel="shortcut icon" href="http://www.hiit.fi/sites/all/themes/hiit/favicon.ico" type="image/x-icon" /><link rel="stylesheet" href="hiit.css" type="text/css" /><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/><link rel="shortcut icon" href="http://www.hiit.fi/sites/all/themes/hiit/favicon.ico" type="image/x-icon" /><link rel="stylesheet" href="hiit.css" type="text/css" />
+<title>ContextLogger2 Features</title>
+<meta name="generator" content="http://txt2tags.sf.net" />
+</head>
+<body><table class="navi"><tr><th>Go to</th></td><tr><td><a href="../index.html">CL2</a></td></tr><tr><td><a href="http://hiit.fi/uix/">UIx</a></td></tr><tr><td><a href="http://hiit.fi/">HIIT</a></td></tr></table>
+<div align="center">
+<h1>ContextLogger2 Features</h1>
+<h3>Tue Mar 22 00:59:36 2011</h3>
+</div>
+
+<h1>1. Features Overview</h1>
+<ul>
+<li>Supports Symbian OS v9-up as a target platform, and Linux as a development platform.
+
+</li>
+<li>Non-intrusive, persistent, and robust data logging.
+
+  <ul>
+  <li>A number of "sensors" supported (many of which may be individually enabled or disabled at runtime).
+  
+  </li>
+  <li>By default built to run on the background without any visible GUI.
+  
+  </li>
+  <li>An optional, provided watchdog application may be installed to start the application up at boot, and to reawaken it after error situations.
+  
+  </li>
+  </ul>
+</li>
+<li>Automatic uploads to a server at configurable intervals, via a configurable access point, by HTTP POST to a configurable URL.
+
+  <ul>
+  <li>HTTP over SSL is supported.
+  
+  </li>
+  </ul>
+</li>
+<li>Remote configurability via an XMPP/Jabber based protocol.
+
+  <ul>
+  <li>SASL authentication and TLS encryption is supported.
+  
+  </li>
+  <li>Use any compatible Jabber client and server for adjusting configuration parameters.
+  
+  </li>
+  <li>Remote control sessions triggered via SMS.
+  
+  </li>
+  </ul>
+</li>
+<li>SQLite3 database based logging format.
+
+  <ul>
+  <li>Software for inspecting and querying database files is readily available for a variety of platforms.
+  
+  </li>
+  <li>Optional Gzip compression of data files.
+  
+  </li>
+  </ul>
+</li>
+<li>Easy to install and configure (hopefully).
+
+  <ul>
+  <li>The phone client software is available packaged as SIS file(s).
+  
+  </li>
+  <li>"Static" configuration can be specified in a text file.
+  
+  </li>
+  <li>"Dynamic" configuration can be adjusted: using a provided application; from other local applications via a Symbian client/server session; or remotely via a Jabber-based protocol.
+  </li>
+  </ul>
+</li>
+</ul>
+
+<a id="sensors" name="sensors"></a>
+<h2>Supported Context Data Sources</h2>
+<ul>
+<li>Ambient light
+
+  <ul>
+  <li>surrounding environment light level (dark, twilight, light, bright, sunny)
+  
+  </li>
+  </ul>
+</li>
+<li>Application focus
+
+  <ul>
+  <li>application focus changes (name and UID of focused application)
+  
+  </li>
+  </ul>
+</li>
+<li>Application message
+
+  <ul>
+  <li>a textual message from another application
+  
+  </li>
+  <li>allows other applications to let CL2 take care of log storage and uploading
+  
+  </li>
+  </ul>
+</li>
+<li>Battery status
+
+  <ul>
+  <li>status (powered by battery, on external power with battery, without battery)
+  
+  </li>
+  <li>battery charge level (percentage)
+  
+  </li>
+  </ul>
+</li>
+<li>Bluetooth proximity
+
+  <ul>
+  <li>BT proximity scanning (BT names and addresses of discovered devices)
+  
+  </li>
+  <li>scanning frequency is configurable
+  
+  </li>
+  </ul>
+</li>
+<li>Call status
+
+  <ul>
+  <li>call status changes (idle, ringing, connected, on hold, etc.)
+  
+  </li>
+  <li>including remote party phone number
+  
+  </li>
+  <li>including remote party name (from Contacts) when available
+  
+  </li>
+  <li>including call termination status code(s)
+  
+  </li>
+  </ul>
+</li>
+<li>Double tap
+
+  <ul>
+  <li>tap sensor events (possibly including direction)
+  
+  </li>
+  <li>many devices with accelerometer hardware can report taps, and a double tap is where two taps occur in quick succession and in the same direction
+  
+  </li>
+  </ul>
+</li>
+<li>Flightmode
+
+  <ul>
+  <li>flight mode status changes (changed to ON or changed to OFF)
+  
+  </li>
+  </ul>
+</li>
+<li>GPS
+
+  <ul>
+  <li>position scanning using satellite-based positioning (coordinates, altitude, accuracy values, etc.)
+  
+  </li>
+  <li>"best" satellite-based positioning method chosen automatically (typically A-GPS)
+  
+  </li>
+  <li>sampling frequency is configurable
+  
+  </li>
+  </ul>
+</li>
+<li>GSM cell ID
+
+  <ul>
+  <li>cell ID changes (new cell ID value)
+  
+  </li>
+  </ul>
+</li>
+<li>HTTP request URLs
+
+  <ul>
+  <li>URL for each HTTP request made through the Symbian native HTTP stack
+  
+  </li>
+  </ul>
+</li>
+<li>Inactivity
+
+  <ul>
+  <li>activity status changes (just became active, or has been idle for a certain amount of time)
+  
+  </li>
+  </ul>
+</li>
+<li>Indicators
+
+  <ul>
+  <li>Standby screen indicator changes (charger connected, network available, call in progress)
+  
+  </li>
+  </ul>
+</li>
+<li>Location
+
+  <ul>
+  <li>a sensor for logging position changes in a battery-frugal manner
+  
+  </li>
+  <li>currently: does satellite positioning with integrated hardware (network assisted unless roaming data is forbidden), but only briefly, only after GSM cell ID changes, and not too frequently
+  
+  </li>
+  <li>scanning frequency limit and satellite positioning max time interval are configurable
+  
+  </li>
+  </ul>
+</li>
+<li>Keypresses
+
+  <ul>
+  <li>keypress times, but no keycodes (for privacy reasons)
+  
+  </li>
+  </ul>
+</li>
+<li>Music playback
+
+  <ul>
+  <li>"Music player" application status changes (playback started, paused, track changed, playback volume changed, etc.)
+  
+  </li>
+  <li>details for the playing track (URL, title, artist, album)
+  
+  </li>
+  </ul>
+</li>
+<li>Network operator
+
+  <ul>
+  <li>operator "long" name (of network to which registered)
+  
+  </li>
+  </ul>
+</li>
+<li>Network registration status
+
+  <ul>
+  <li>status (no service, emergency only, on home network, roaming, etc.)
+  
+  </li>
+  </ul>
+</li>
+<li>Network signal strength
+
+  <ul>
+  <li>signal strength (in dBm)
+  
+  </li>
+  <li>number of signal bars displayed
+  
+  </li>
+  </ul>
+</li>
+<li>Profile
+
+  <ul>
+  <li>profile changes (name and ID of activated profile)
+  
+  </li>
+  </ul>
+</li>
+<li>Proximity
+
+  <ul>
+  <li>whether something is very close to the device (a boolean value)
+  
+  </li>
+  </ul>
+</li>
+<li>SMS receival/sending
+
+  <ul>
+  <li>SMS event type (message sent or received)
+  
+  </li>
+  <li>including remote party phone number
+  
+  </li>
+  <li>including remote party name (from Contacts) when available
+  
+  </li>
+  <li>optionally: message body text
+  
+  </li>
+  </ul>
+</li>
+<li>Web browser adaptive history list changes
+
+  <ul>
+  <li>"Name" and "Address" (URL) for new entries
+  </li>
+  </ul>
+</li>
+</ul>
+
+<hr class="light" />
+<p>
+<a href="http://hiit.fi/u/hasu/">Tero Hasu</a>
+</p>
+
+<!-- xhtml code generated by txt2tags 2.5 (http://txt2tags.sf.net) -->
+<!-- cmdline: txt2tags -\-target xhtml -\-infile homepage/features.txt2tags.txt -\-outfile contextlogger2/features.html -\-encoding utf-8 -C homepage/config.t2t -->
+</body></html>

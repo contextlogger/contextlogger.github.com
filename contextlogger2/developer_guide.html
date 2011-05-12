@@ -1,0 +1,182 @@
+<?xml version="1.0"
+      encoding="utf-8"
+?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/><link rel="shortcut icon" href="http://www.hiit.fi/sites/all/themes/hiit/favicon.ico" type="image/x-icon" /><link rel="stylesheet" href="hiit.css" type="text/css" /><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/><link rel="shortcut icon" href="http://www.hiit.fi/sites/all/themes/hiit/favicon.ico" type="image/x-icon" /><link rel="stylesheet" href="hiit.css" type="text/css" />
+<title>ContextLogger2 Hacking</title>
+<meta name="generator" content="http://txt2tags.sf.net" />
+</head>
+<body><table class="navi"><tr><th>Go to</th></td><tr><td><a href="../index.html">CL2</a></td></tr><tr><td><a href="http://hiit.fi/uix/">UIx</a></td></tr><tr><td><a href="http://hiit.fi/">HIIT</a></td></tr></table>
+<div align="center">
+<h1>ContextLogger2 Hacking</h1>
+<h3>Thu Mar 17 02:00:59 2011</h3>
+</div>
+
+
+<hr class="light" />
+
+  <ol>
+  <li><a href="#toc1">Logger</a>
+    <ul>
+    <li><a href="#toc2">1.1. General Design Guidelines</a>
+    </li>
+    <li><a href="#toc3">1.2. Adding a New Sensor</a>
+    </li>
+    </ul>
+  </li>
+  <li><a href="#toc4">Watchdog</a>
+  </li>
+  <li><a href="#toc5">Tools</a>
+    <ul>
+    <li><a href="#toc6">3.1. Koog</a>
+    </li>
+    </ul>
+  </li>
+  </ol>
+
+
+<hr class="light" />
+
+<a id="toc1" name="toc1"></a>
+<h1>1. Logger</h1>
+<a id="toc2" name="toc2"></a>
+<h2>1.1. General Design Guidelines</h2>
+<p>
+The implementation of the logger daemon has been influenced by these guidelines:
+</p>
+<ul>
+<li>Be unintrusive.
+
+  <ul>
+  <li>Do not bother the user with questions.
+  
+  </li>
+  <li>Important and infrequent error messages may be displayed.
+  
+  </li>
+  </ul>
+</li>
+<li>Treat data sources uniformly, for purposes of maintainability.
+
+  <ul>
+  <li>Each sensor should have its own logger "active object" that runs independently of others.
+  
+  </li>
+  <li>Code generation may be utilized in integrating a sensor object with the rest of the framework. (The database access boilerplate code is presently automatically generated for most sensors.)
+  
+  </li>
+  </ul>
+</li>
+<li>Do not waste resources.
+
+  <ul>
+  <li>Frequently executed code (as typically found in sensors) should be written tightly.
+  
+  </li>
+  <li>No heavy runtimes are to be used (unless the platform requires it).
+  
+  </li>
+  <li>Use compilers for optimization and increased abstraction --- "execute" code already at compile time, and treat C (and C++) as portable assembly.
+  
+  </li>
+  <li>Consider including compile-time options for disabling added features, to allow for optimization for a given use case by removing unneeded features.
+  
+  </li>
+  <li>Particularly for energy-hungry "active" sensors, make it possible to configure the scanning frequency at runtime, and to start/stop the sensor at any time, e.g., to regulate battery consumption.
+  
+  </li>
+  </ul>
+</li>
+<li>Be platform-independent where feasible and sensible.
+
+  <ul>
+  <li>There currently is no dominant smartphone platform, and the platform landscape is evolving at a fast pace. There are standard or widely available languages and libraries, however, so favor them for reasons of portability.
+  
+  </li>
+  <li>Consider abstracting away machine specifics (such as size and endianness of data items) in your code.
+  
+  </li>
+  <li>Hide platform-dependencies under interfaces that could potentially be implemented for other platforms as well.
+  
+  </li>
+  </ul>
+</li>
+<li>Strive for robust error handling.
+
+  <ul>
+  <li>Try to ensure that errors that matter do not go unnoticed by the logger.
+  
+  </li>
+  <li>Consolidate recoverable error handling to suitably high-level code that has enough context information to actually decide how to handle an error. This way you also avoid cluttering all of your code with error handling logic.
+  
+  </li>
+  <li>And yes, also handle out-of-memory errors gracefully.
+  
+    <ul>
+    <li>In particular, ensure that any Qt or GLib out-of-memory errors are treated as fatal as said libraries were not originally designed to support OOM recovery, and may potentially leak resources in out-of-memory error situations.
+    
+    </li>
+    <li>In fact, for consistency, better consider all out-of-memory errors as fatal. Still, log any and all errors before daemon process exit if possible.
+    </li>
+    </ul>
+  </li>
+  </ul>
+</li>
+</ul>
+
+<a id="toc3" name="toc3"></a>
+<h2>1.2. Adding a New Sensor</h2>
+<p>
+The steps to take when adding a new sensor are typically like this:
+</p>
+<ol>
+<li>Specify a database table for recording the sensor readings in <code>src/sa_sensor_list_spec.ss</code>. If you want a compile-time option for the sensor, specify it here; something like <code>``__SENSORNAME_ENABLED__``</code>.
+
+</li>
+<li>If you have a compile-time option for the sensor, enable it for desired variant builds by editing the <code>variants/*.var.ss</code> files. If you want to compute a default setting based on other compile-time configuration options, you can do this in <code>variants/base.ss</code>.
+
+</li>
+<li>Take a similar sensor implementation as a template for the interface and implementation files. (An example of such files would be <code>src/epoc-cellid.hpp</code> and <code>src/epoc-cellid.cpp</code>.) Copy, rename, and modify to implement your required sensor.
+
+</li>
+<li>Add an <code>#include</code> for the header file of your sensor in <code>src/sa_array.cpp</code>. Also add a <code>DECLARE_SENSOR_sensorname</code> style declaration, or otherwise declare your sensor active object in the <code>_sa_Array</code> object.
+
+</li>
+<li>List your implementation file in <code>Makefile</code> and/or the <code>src/module.mmp.in</code> file as appropriate. (The former is required for Linux builds, whereas the latter is required for Symbian builds.) Again, if you had a compile-time option for your sensor, you may want to make use of it here.
+
+</li>
+<li>If your sensor implementation relies on system DLLs, you should ensure they are listed in <code>Makefile</code> and/or <code>src/module.mmp.in</code> as appropriate. Again, if you had a compile-time option for your sensor, you may want to make use of it here; this is particularly important if the libraries used are not included in all SDKs.
+</li>
+</ol>
+
+<p>
+As an example of the code required for a single sensor, below is a patch showing a sensor implemented based on the <a href="http://wiki.forum.nokia.com/index.php/Adaptive_History_List_API">Adaptive History List API</a>:
+</p>
+<ul>
+<li><a href="weburl-sensor.diff"><code>weburl</code> sensor patch</a>
+</li>
+</ul>
+
+<a id="toc4" name="toc4"></a>
+<h1>2. Watchdog</h1>
+<ul>
+<li><a href="states.png">state graph</a>
+</li>
+</ul>
+
+<a id="toc5" name="toc5"></a>
+<h1>3. Tools</h1>
+<a id="toc6" name="toc6"></a>
+<h2>3.1. Koog</h2>
+<p>
+<a href="http://korpi.hiit.fi/koog/">Koog</a> is a mixed-code generation tool that we have used in maintaining the logger codebase, mostly interactively under Emacs. In case you're wondering about the <code>/***koog***//***end***/</code> style comments found in the code. If these comments get on the way, feel free to delete them. It <i>is</i> quite possible to maintain the boilerplate code manually as well.
+</p>
+<hr class="light" />
+<p>
+<a href="http://hiit.fi/u/hasu/">Tero Hasu</a>
+</p>
+
+<!-- xhtml code generated by txt2tags 2.5 (http://txt2tags.sf.net) -->
+<!-- cmdline: txt2tags -\-target xhtml -\-infile homepage/developer_guide.txt2tags.txt -\-outfile contextlogger2/developer_guide.html -\-encoding utf-8 -C homepage/config.t2t -->
+</body></html>

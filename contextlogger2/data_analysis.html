@@ -1,0 +1,246 @@
+<?xml version="1.0"
+      encoding="utf-8"
+?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/><link rel="shortcut icon" href="http://www.hiit.fi/sites/all/themes/hiit/favicon.ico" type="image/x-icon" /><link rel="stylesheet" href="hiit.css" type="text/css" /><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/><link rel="shortcut icon" href="http://www.hiit.fi/sites/all/themes/hiit/favicon.ico" type="image/x-icon" /><link rel="stylesheet" href="hiit.css" type="text/css" />
+<title>ContextLogger2 Data Analysis Guide</title>
+<meta name="generator" content="http://txt2tags.sf.net" />
+</head>
+<body><table class="navi"><tr><th>Go to</th></td><tr><td><a href="../index.html">CL2</a></td></tr><tr><td><a href="http://hiit.fi/uix/">UIx</a></td></tr><tr><td><a href="http://hiit.fi/">HIIT</a></td></tr></table>
+<div align="center">
+<h1>ContextLogger2 Data Analysis Guide</h1>
+<h3>Thu Mar 17 01:59:00 2011</h3>
+</div>
+
+
+<hr class="light" />
+
+  <ol>
+  <li><a href="#toc1">Interpreting Log Data</a>
+    <ul>
+    <li><a href="#toc2">1.1. Call Status (Symbian)</a>
+    </li>
+    <li><a href="#toc3">1.2. Keypresses (Symbian)</a>
+    </li>
+    <li><a href="#toc4">1.3. Indicator (Symbian)</a>
+    </li>
+    <li><a href="#toc5">1.4. Battery Status (Symbian)</a>
+    </li>
+    <li><a href="#toc6">1.5. Network Registration Status (Symbian)</a>
+    </li>
+    <li><a href="#toc7">1.6. Network Signal Strength (Symbian)</a>
+    </li>
+    <li><a href="#toc8">1.7. Ambient Light (Qt Mobility)</a>
+    </li>
+    <li><a href="#toc9">1.8. Tapping (Qt Mobility)</a>
+    </li>
+    </ul>
+  </li>
+  </ol>
+
+
+<hr class="light" />
+
+<a id="toc1" name="toc1"></a>
+<h1>1. Interpreting Log Data</h1>
+<a id="toc2" name="toc2"></a>
+<h2>1.1. Call Status (Symbian)</h2>
+<p>
+The logged integer values for the "callstatus" sensor have the following interpretations:
+</p>
+<table border="1" cellpadding="4">
+<tr>
+<td>0</td>
+<td>The status is unknown.</td>
+</tr>
+<tr>
+<td>1</td>
+<td>Idle line (no active calls).</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Call dialling.</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Call ringing.</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Call answering.</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Call connecting.</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Call connected.</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Call is undergoing temporary channel loss (it may or may not be reconnected).</td>
+</tr>
+<tr>
+<td>8</td>
+<td>Call disconnecting.</td>
+</tr>
+<tr>
+<td>9</td>
+<td>Call on hold.</td>
+</tr>
+<tr>
+<td>10</td>
+<td>Call is transferring.</td>
+</tr>
+<tr>
+<td>11</td>
+<td>Call in transfer is alerting the remote party.</td>
+</tr>
+</table>
+
+<p>
+(The above come from the Symbian API documentation.)
+</p>
+<p>
+As for the call termination reason codes, see <a href="http://wiki.forum.nokia.com/index.php/TSS001320_-_Interpreting_TCallInfoV1::iExitCode_value">this Forum Nokia wiki page</a>. In the log, the <code>osterm</code> column has the OS-specific component of the code, and the <code>netterm</code> column has the network-specific component of the code. The <code>netterm</code> codes, in the event of the call terminating due to the network or the remote party's actions, should be documented in the <code>exterror.h</code> Symbian header file, available in some SDKs.
+</p>
+<a id="toc3" name="toc3"></a>
+<h2>1.2. Keypresses (Symbian)</h2>
+<p>
+The "keypress" sensor only records the keypress times, not the keycodes. These are represented using a difference encoding, calculated by adding the <code>base</code> time to each of the recorded <code>times</code>. This way one gets the Unix time for each, i.e., the number of seconds since the Unix epoch.
+</p>
+<a id="toc4" name="toc4"></a>
+<h2>1.3. Indicator (Symbian)</h2>
+<p>
+Two codes are logged for the "indicator" sensor. The latter shows what indicators are available on the particular device, and the value should be a constant. The former value indicates which indicators are visible on the phone screen. Both values are bit fields expressed as a single integer, with the bits interpreted as follows:
+</p>
+<table border="1" cellpadding="4">
+<tr>
+<td>1</td>
+<td>Charger connected indicator.</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Network available indicator.</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Call in progress indicator.</td>
+</tr>
+</table>
+
+<a id="toc5" name="toc5"></a>
+<h2>1.4. Battery Status (Symbian)</h2>
+<p>
+Two codes are logged for the "battery" sensor. The latter shows the battery charge level (as a percentage). The former value indicates battery status, with the values interpreted as follows:
+</p>
+<table border="1" cellpadding="4">
+<tr>
+<td>0</td>
+<td>Power status unknown.</td>
+</tr>
+<tr>
+<td>1</td>
+<td>Powered by battery.</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Battery connected, but with external power.</td>
+</tr>
+<tr>
+<td>3</td>
+<td>No battery connected, on external power.</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Power fault.</td>
+</tr>
+</table>
+
+<a id="toc6" name="toc6"></a>
+<h2>1.5. Network Registration Status (Symbian)</h2>
+<table border="1" cellpadding="4">
+<tr>
+<td>0</td>
+<td>Registration status unknown.</td>
+</tr>
+<tr>
+<td>1</td>
+<td>Not registered and no service detected.</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Emergency calls only.</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Searching for a network.</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Registered, network busy.</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Registered on home network.</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Registration denied.</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Registered, roaming.</td>
+</tr>
+</table>
+
+<a id="toc7" name="toc7"></a>
+<h2>1.6. Network Signal Strength (Symbian)</h2>
+<p>
+The first logged value is signal strength in dBm (between -123 and -1, inclusive, or 0 for undefined). The second value is the number of bars (between 0 and 7, inclusive).
+</p>
+<a id="toc8" name="toc8"></a>
+<h2>1.7. Ambient Light (Qt Mobility)</h2>
+<table border="1" cellpadding="4">
+<tr>
+<td>0</td>
+<td>Undefined.</td>
+</tr>
+<tr>
+<td>1</td>
+<td>Dark.</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Twilight.</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Light.</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Bright.</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Sunny.</td>
+</tr>
+</table>
+
+<a id="toc9" name="toc9"></a>
+<h2>1.8. Tapping (Qt Mobility)</h2>
+<p>
+Two values are recorded. The first one specifies the direction, but tends to be 0 (for unknown) on many devices. In cases where directions have been reported, look at [this table
+<a href="http://doc.qt.nokia.com/qtmobility-1.1.0/qtapreading.html#TapDirection-enum">http://doc.qt.nokia.com/qtmobility-1.1.0/qtapreading.html#TapDirection-enum</a>] for interpretations. The second value is 1 for double taps, and 0 for single taps.
+</p>
+<hr class="light" />
+<p>
+<a href="http://hiit.fi/u/hasu/">Tero Hasu</a>
+</p>
+
+<!-- xhtml code generated by txt2tags 2.5 (http://txt2tags.sf.net) -->
+<!-- cmdline: txt2tags -\-target xhtml -\-infile homepage/data_analysis.txt2tags.txt -\-outfile contextlogger2/data_analysis.html -\-encoding utf-8 -C homepage/config.t2t -->
+</body></html>

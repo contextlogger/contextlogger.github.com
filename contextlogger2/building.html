@@ -1,0 +1,144 @@
+<?xml version="1.0"
+      encoding="utf-8"
+?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/><link rel="shortcut icon" href="http://www.hiit.fi/sites/all/themes/hiit/favicon.ico" type="image/x-icon" /><link rel="stylesheet" href="hiit.css" type="text/css" /><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/><link rel="shortcut icon" href="http://www.hiit.fi/sites/all/themes/hiit/favicon.ico" type="image/x-icon" /><link rel="stylesheet" href="hiit.css" type="text/css" />
+<title>ContextLogger2 Builder's Guide</title>
+<meta name="generator" content="http://txt2tags.sf.net" />
+</head>
+<body><table class="navi"><tr><th>Go to</th></td><tr><td><a href="../index.html">CL2</a></td></tr><tr><td><a href="http://hiit.fi/uix/">UIx</a></td></tr><tr><td><a href="http://hiit.fi/">HIIT</a></td></tr></table>
+<div align="center">
+<h1>ContextLogger2 Builder's Guide</h1>
+<h3>Thu Mar 17 01:46:05 2011</h3>
+</div>
+
+
+<hr class="light" />
+
+  <ol>
+  <li><a href="#toc1">Logger Program</a>
+    <ul>
+    <li><a href="#toc2">1.1. Compile Time Configuration</a>
+      <ul>
+      <li><a href="#toc3">1.1.1. Daemon vs. Application Builds</a>
+      </li>
+      <li><a href="#toc4">1.1.2. Keypress Sensor Build Variants</a>
+      </li>
+      </ul>
+    </li>
+    <li><a href="#toc5">1.2. Prerequisites for Building</a>
+      <ul>
+      <li><a href="#toc6">1.2.1. Profile Sensor</a>
+      </li>
+      </ul>
+    </li>
+    <li><a href="#toc7">1.3. Required Capabilities</a>
+    </li>
+    <li><a href="#toc8">1.4. Compile Time Configuration of Parameters</a>
+      <ul>
+      <li><a href="#toc9">1.4.1. Configuring Upload Parameters</a>
+      </li>
+      </ul>
+    </li>
+    </ul>
+  </li>
+  </ol>
+
+
+<hr class="light" />
+
+<a id="toc1" name="toc1"></a>
+<h1>1. Logger Program</h1>
+<p>
+The logger program has a lot of functionality, and it necessarily requires some site and user specific configuration. Otherwise it aims to just run and run without much interaction with the outside world, and hence here our focus is primarily on explaining how to do the configuring.
+</p>
+<p>
+The source code for the logger program can be found in the <code>daemon</code> directory.
+</p>
+<a id="toc2" name="toc2"></a>
+<h2>1.1. Compile Time Configuration</h2>
+<p>
+The compile time configuration management is largely handled by a custom configuration specification system, in which each build variant has a unique name, and is described in its own file. See the <code>variants</code> directory. Any configuration options shared across variants are given in the <code>base.ss</code> file, and there are a number of <code>.var.ss</code> files, each of which describe a particular, concrete build variant. To do a build with a given unique combination of build parameters, it is suggested that your write a variant specification file for that build (if one does not already exist), and then invoke
+</p>
+<pre>
+  make config VARIANT_NAME=<i>your_variant_name</i>
+</pre>
+
+<p>
+Unless otherwise indicated, any compile-time configuration parameters are specified via this variant specification system.
+</p>
+<a id="toc3" name="toc3"></a>
+<h3>1.1.1. Daemon vs. Application Builds</h3>
+<p>
+The logger can&#8212;for some configurations&#8212;be built with or without a GUI. We refer to GUI-less builds as "daemon" builds and GUI-ful builds as "application" builds.
+</p>
+<p>
+For daemon builds, define the <code>binary-type</code> configuration parameter as <code>daemon</code>. For application builds, define it as <code>application</code>.
+</p>
+<p>
+For Linux, the logger is always built as a daemon, as no GUI has been implemented for Linux.
+</p>
+<p>
+Symbian builds can be either "headless" or with a primitive GUI. The latter have an icon in the application menu, and will also appear in the task list. These facilities, along with the primitive GUI, makes it convenient to launch and exit the logger, and to see when it is running, but it can be intrusive in trials. Hence one may want to deploy a daemon build in trials in which the logger is to run on the background, with minimal intrusiveness.
+</p>
+<p>
+The GUI variant also demonstrates how CL2 can be embedded in a native S60 application, so that logging only occurs when a particular application is running.
+</p>
+<a id="toc4" name="toc4"></a>
+<h3>1.1.2. Keypress Sensor Build Variants</h3>
+<p>
+There are two variant implementations of the "keypress" sensor. You can choose which one to use by setting the <code>have-anim.attr</code> configuration parameter appropriately. The non-anim variant may cause problems, as there may be other processes running on the phone that compete for the same key events; the situation varies between different phone models, and possibly different locales with different input methods. The non-anim variant is known to cause problems with the N95 slider events, for instance, if attempting to observe for the relevant "key" events; as a result, the non-anim variant has been configured to observe only some of the most common keys (such as the number keys). The anim variant should be more robust, and should capture just about all key events, but for building and running, it requires the "keyevents" component.
+</p>
+<p>
+If you set <code>have-anim.attr</code> to a true value, the logger will fail to run unless you have the Jaiku "keyevents" library installed on the target device.
+</p>
+<a id="toc5" name="toc5"></a>
+<h2>1.2. Prerequisites for Building</h2>
+<p>
+The build tools required for building this component from "master" source files include <a href="http://www.gnu.org/software/make/">GNU Make</a>, <a href="http://www.ruby-lang.org/">Ruby</a>, <a href="http://www.plt-scheme.org/">PLT Scheme</a>, <a href="http://www.irule.be/bvh/c++/fastdep/">fastdep</a>, <a href="http://www.complang.org/ragel/">Ragel</a>, <a href="http://www.graphviz.org/">Graphviz</a> and <a href="http://www.doxygen.org/">Doxygen</a>, in addition to your usual (platform-specific) toolchain for building C and C++ applications.
+</p>
+<p>
+On Debian-based systems one might install some of the prerequisites with:
+</p>
+<pre>
+  aptitude install make ruby plt-scheme fastdep ragel graphviz doxygen g++ libglib-dev sqlite3-dev libev-dev
+</pre>
+
+<p>
+The Symbian builds depend on a number of libraries; SDK plugins for these are required, and the libraries must also be installed to the target device. These dependencies include at least PIPS and GLib, but really, you're best off installing all of Open C/C++. Note that some phones have Open C built in. Note also that older versions of Open C are quite buggy, so preferably choose a more recent version (at least v1.6). Many of the provided build configurations also depend on Qt.
+</p>
+<a id="toc6" name="toc6"></a>
+<h3>1.2.1. Profile Sensor</h3>
+<p>
+The "profile" sensor requires an <a href="http://www.forum.nokia.com/Tools_Docs_and_Code/Tools/Extensions/S60_Extensions_Plugins/">SDK plugin</a> for building for S60 v3.0, and this is available from <a href="http://www.forum.nokia.com/">Forum Nokia</a>. For v3.1-up no such plugin is required, as an API for getting profile change events is included in the SDKs as standard.
+</p>
+<a id="toc7" name="toc7"></a>
+<h2>1.3. Required Capabilities</h2>
+<p>
+If you wish to enable the "gps" sensor, you must grant the Location capability to the executable. The "cellid" sensor in turn requires the ReadDeviceData capability. The anim-variant of the "keypress" sensor requires the ProtServ capability, although I guess this requirement could be lifted by editing the keyevents component code. The S60 v3.0 version of "profile" sensor implementation appears to require some capability that is not self-signable, but the documentation of the profile API does not say what.
+</p>
+<p>
+Naturally, if you grant certain capabilities to an executable, you must also be able to certify those capabilities, unless you are using hacked phones, that is.
+</p>
+<a id="toc8" name="toc8"></a>
+<h2>1.4. Compile Time Configuration of Parameters</h2>
+<a id="toc9" name="toc9"></a>
+<h3>1.4.1. Configuring Upload Parameters</h3>
+<p>
+The log upload default configuration is specified at compile time by setting the <code>iap-id-expr.attr</code>, <code>upload-url.attr</code>, <code>username.attr</code>, and <code>upload-time-expr.attr</code> values. The <code>iap-id-expr.attr</code> value is a Lua expression evaluating to the numeric ID of the access point to use (a trivial Python script can list all the alternatives, see list_iaps.py); <code>upload-url.attr</code> is a Lua expression evaluating to the URL to post to; <code>username.attr</code> is used in the filename of the uploaded file to possibly identify the originator; and <code>upload-time-expr.attr</code> specifies how frequently to do uploads (see the file ``test_moment_parser.c` in the time-spec component for examples of the language you can use).
+</p>
+<p>
+The compiled in <code>upload-url.attr</code> and <code>username.attr</code> can be overridden using a configuration file; see sample-config.txt (in the source code) for an example what the file should contain.
+</p>
+<p>
+<code>iap-id-expr.attr</code> and <code>upload-time-expr.attr</code> can be overridden at runtime via the Launcher program, or more generally by making a request via the CL2 client library.
+</p>
+<hr class="light" />
+<p>
+<a href="http://hiit.fi/u/hasu/">Tero Hasu</a>
+</p>
+
+<!-- xhtml code generated by txt2tags 2.5 (http://txt2tags.sf.net) -->
+<!-- cmdline: txt2tags -\-target xhtml -\-infile homepage/building.txt2tags.txt -\-outfile contextlogger2/building.html -\-encoding utf-8 -C homepage/config.t2t -->
+</body></html>

@@ -1,0 +1,164 @@
+<?xml version="1.0"
+      encoding="utf-8"
+?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/><link rel="shortcut icon" href="http://www.hiit.fi/sites/all/themes/hiit/favicon.ico" type="image/x-icon" /><link rel="stylesheet" href="hiit.css" type="text/css" /><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/><link rel="shortcut icon" href="http://www.hiit.fi/sites/all/themes/hiit/favicon.ico" type="image/x-icon" /><link rel="stylesheet" href="hiit.css" type="text/css" />
+<title>ContextLogger2 Demo Download</title>
+<meta name="generator" content="http://txt2tags.sf.net" />
+</head>
+<body><table class="navi"><tr><th>Go to</th></td><tr><td><a href="../index.html">CL2</a></td></tr><tr><td><a href="http://hiit.fi/uix/">UIx</a></td></tr><tr><td><a href="http://hiit.fi/">HIIT</a></td></tr></table>
+<div align="center">
+<h1>ContextLogger2 Demo Download</h1>
+<h3>Sat Jan 15 06:20:44 2011</h3>
+</div>
+
+
+<hr class="light" />
+
+    <ul>
+    <li><a href="#toc1">0.1. Quick Download</a>
+    </li>
+    </ul>
+
+  <ol>
+  <li><a href="#toc2">ContextLogger2 Demo</a>
+    <ul>
+    <li><a href="#toc3">1.1. Demo Downloads</a>
+    </li>
+    <li><a href="#toc4">1.2. Prerequisites</a>
+    </li>
+    </ul>
+  </li>
+  </ol>
+
+
+<hr class="light" />
+
+<a id="toc1" name="toc1"></a>
+<h2>0.1. Quick Download</h2>
+<p>
+If you're in a <font color="red">hurry</font>, just go <a href="../../download/"><b>download</b></a>. Choose the build that you think is the best match for your device&#8212;the naming is somewhat comprehensible. If you have trouble picking the correct binary, or if the application fails to install or run, then read on.
+</p>
+<a id="toc2" name="toc2"></a>
+<h1>1. ContextLogger2 Demo</h1>
+<p>
+To make proper use of ContextLogger2, one really ought to do a custom build with the most appropriate build configuration and software signing certificates. Typically one would do a "headless", auto-starting build of the logger and the associated software.
+</p>
+<p>
+As building and signing is a hassle, and as invisible background processes do not make for a good demo, we have built and signed dedicated demo versions of the logger, ready for installation. They have the following characteristics:
+</p>
+<ul>
+<li>The demo builds are also provided in self-signed versions, which severely restricts the number of sensors available. (For instance the commonly required <code>ReadDeviceData</code> capability is not grantable to self-signed applications.)
+
+</li>
+<li>The demo builds are standalone, and require no additional custom supporting libraries or executables. This further restricts the available sensors and features, but makes installation easy. (Also, for those who bother, this makes it possible to sign the unsigned, high-capability demo builds using Symbian Open Signed Online. The watchdog and HTTP filter plugin components, for example, would not be signable in such a way.)
+
+</li>
+<li>The demo builds have fairly minimal external dependencies for reduced-hassle installation. (Only Open C/C++ and Qt&#8212;where available&#8212;are required, and may or may not come preinstalled on your device.)
+
+</li>
+<li>The demo builds have a simple GUI, making it easier to start and stop the program, and easier to see what is going on.
+</li>
+</ul>
+
+<p>
+<img align="middle" src="Screenshot0027.jpg" border="0" alt=""/>
+</p>
+<a id="toc3" name="toc3"></a>
+<h2>1.1. Demo Downloads</h2>
+<p>
+Downloads are available from:
+</p>
+<ul>
+<li><a href="../../download/">download</a>
+</li>
+</ul>
+
+<p>
+The <code>sisx</code> installation packages are signed, while the <code>sis</code> ones are not. Unsigned packages can generally only be installed on hacked phones, and hence you may have to sign them yourself using Symbian Open Signed or a developer certificate. The <code>self30</code> variants have maximum self-signed capabilities allowed on S60 v3.0 and v3.1, the <code>self32</code> variants have maximum self-signed capabilities allowed on S60 v3.2-up, and the <code>unsigned</code> variants have maximum Symbian Open Signed capabilities. The set of sensors in the builds have been adjusted based on the capabilities. For example, the <code>self30</code> variants do not include support for location sensors (which require the <code>Location</code> capability).
+</p>
+<p>
+At least one of the builds should be suitable for you regardless of whether you have an S60 3rd Edition, 5th Edition, or Symbian^3 device.
+</p>
+<p>
+The following build configurations are currently available:
+</p>
+<table border="1" cellpadding="4">
+<tr>
+<th>Signed Variant</th>
+<th>Description</th>
+</tr>
+<tr>
+<td><code>demo_30_self30</code></td>
+<td>S60 v3.0 self-signed. Only has a blank GUI, since the demo GUI is implemented in Qt, which is not available for S60 v3.0. Depends on Open C/C++.</td>
+</tr>
+<tr>
+<td><code>demo_31_self30</code></td>
+<td>Like <code>demo_30_self30</code>, but includes functionality implemented in Qt, including a basic GUI. Depends on Open C/C++ and Qt.</td>
+</tr>
+<tr>
+<td><code>demo_32_self32</code></td>
+<td>Like <code>demo_31_self30</code>, but with <code>Location</code> capability, and additional functionality enabled by it. Depends on Open C/C++ and Qt.</td>
+</tr>
+<tr>
+<td><code>demo_52_self32</code></td>
+<td>Like <code>demo_32_self32</code>, but with Symbian^3 compatibility improvements. Not recommended for anything other than Symbian^3 devices. Depends on Open C/C++ and Qt.</td>
+</tr>
+</table>
+
+<table border="1" cellpadding="4">
+<tr>
+<th>Unsigned Variant</th>
+<th>Description</th>
+</tr>
+<tr>
+<td><code>demo_30_unsigned</code></td>
+<td>Like <code>demo_30_self30</code>, but unsigned and with more capabilities, with the extra capabilities enabling more functionality. Depends on Open C/C++.</td>
+</tr>
+<tr>
+<td><code>demo_31_unsigned</code></td>
+<td>Like <code>demo_31_self30</code>, but unsigned and with more capabilities, with the extra capabilities enabling more functionality. Depends on Open C/C++ and Qt and Qt Mobility.</td>
+</tr>
+<tr>
+<td><code>demo_52_unsigned</code></td>
+<td>Like <code>demo_52_self32</code>, but unsigned and with more capabilities, with the extra capabilities enabling more functionality. Depends on Open C/C++ and Qt and Qt Mobility.</td>
+</tr>
+</table>
+
+<p>
+The <code>demo_30</code> variants may seem pointless as they display nothing. However, these variants also, when running, collect context data to the <code>e:\data\cl2\log.db</code> file.
+</p>
+<p>
+Note that we do not regularly test the various self-signed builds as they are not that useful in real-world deployment scenarios, and hence it is quite possible that we make mistakes wrt what functionality we include in the builds. Particularly if you see "permission denied" errors, there is reason to suspect that we have included functionality that does not work with self-signed capabilities, and in such a case do let us know.
+</p>
+<a id="toc4" name="toc4"></a>
+<h2>1.2. Prerequisites</h2>
+<p>
+For the ContextLogger2 demo software to run, the following libraries must be installed on the device.
+</p>
+<p>
+The version numbers given are recommended versions. Other versions may or may not work.
+</p>
+<ul>
+<li><a href="http://www.forum.nokia.com/info/sw.nokia.com/id/91d89929-fb8c-4d66-bea0-227e42df9053/Open_C_SDK_Plug-In.html">Open C/C++ 1.7.5</a> is required.
+More recent S60 devices have this library preinstalled, but you may have to upgrade the library if it is incompatible with ContextLogger2.
+
+</li>
+<li><a href="ftp://ftp.qt.nokia.com/qt/symbian/">Qt 4.7.0</a>. Symbian^3 devices (such as the Nokia N8-00) have Qt preinstalled, but for other devices you may have to it and install it. Even Symbian^3 might require an upgrade of the library, should the installed version prove incompatible.
+To install Qt on a Symbian^3 device, download Qt from <a href="http://www.forum.nokia.com/info/sw.nokia.com/id/54b19eed-98ae-4e87-be19-f53758bd6734/Qt_4_7_for_Symbian_3_Developer_Version.html">here</a>, otherwise download it from <a href="ftp://ftp.qt.nokia.com/qt/symbian/4.7.0/">here</a>.
+Qt is not required by the <code>demo_30</code> build variants.
+
+</li>
+<li><a href="http://qt.nokia.com/products/qt-addons/mobility/">Qt Mobility 1.1.0</a>. Symbian^3 devices may have Qt Mobility preinstalled, so note the specific (Symbian^3) version of the Qt Mobility SIS file for overwriting an existing installation if you find that you have to upgrade. Older versions of S60 do not have Qt Mobility built in. Qt Mobility is only required by the <code>unsigned</code> build variants.
+</li>
+</ul>
+
+<hr class="light" />
+<p>
+<a href="http://hiit.fi/u/hasu/">Tero Hasu</a>
+</p>
+
+<!-- xhtml code generated by txt2tags 2.5 (http://txt2tags.sf.net) -->
+<!-- cmdline: txt2tags -\-target xhtml -\-infile homepage/demo.txt2tags.txt -\-outfile contextlogger2/demo.html -\-encoding utf-8 -C homepage/config.t2t -->
+</body></html>

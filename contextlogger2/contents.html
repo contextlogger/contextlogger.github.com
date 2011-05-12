@@ -1,0 +1,199 @@
+<?xml version="1.0"
+      encoding="utf-8"
+?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/><link rel="shortcut icon" href="http://www.hiit.fi/sites/all/themes/hiit/favicon.ico" type="image/x-icon" /><link rel="stylesheet" href="hiit.css" type="text/css" />
+<title>ContextLogger2 Codebase Contents</title>
+<meta name="generator" content="http://txt2tags.sf.net" />
+</head>
+<body><table class="navi"><tr><th>Go to</th></td><tr><td><a href="../index.html">CL2</a></td></tr><tr><td><a href="http://hiit.fi/uix/">UIx</a></td></tr><tr><td><a href="http://hiit.fi/">HIIT</a></td></tr></table>
+<div align="center">
+<h1>ContextLogger2 Codebase Contents</h1>
+<h3>Thu Apr 28 03:26:26 2011</h3>
+</div>
+
+
+<hr class="light" />
+
+  <ul>
+  <li><a href="#toc1">1. Source Code Components</a>
+    <ul>
+    <li><a href="#toc2">1.1. cxx-cl2-cli-lib/</a>
+    </li>
+    <li><a href="#toc3">1.2. daemon/</a>
+    </li>
+    <li><a href="#toc4">1.3. epocxplat/</a>
+    </li>
+    <li><a href="#toc5">1.4. filter-http/</a>
+    </li>
+    <li><a href="#toc6">1.5. keyevents/</a>
+    </li>
+    <li><a href="#toc7">1.6. launcher/</a>
+    </li>
+    <li><a href="#toc8">1.7. lua/</a>
+    </li>
+    <li><a href="#toc9">1.8. megasis/</a>
+    </li>
+    <li><a href="#toc10">1.9. py-cl2-cli-lib/</a>
+    </li>
+    <li><a href="#toc11">1.10. qxmpp/</a>
+    </li>
+    <li><a href="#toc12">1.11. shared/</a>
+    </li>
+    <li><a href="#toc13">1.12. sqlite3h/</a>
+    </li>
+    <li><a href="#toc14">1.13. time-spec/</a>
+    </li>
+    <li><a href="#toc15">1.14. tools/</a>
+    </li>
+    <li><a href="#toc16">1.15. watchdog/</a>
+    </li>
+    </ul>
+  </li>
+  </ul>
+
+
+<hr class="light" />
+
+<a id="toc1" name="toc1"></a>
+<h1>1. Source Code Components</h1>
+<a id="toc2" name="toc2"></a>
+<h2>1.1. cxx-cl2-cli-lib/</h2>
+<p>
+A Symbian C++ client library for locally controlling the logger process.
+</p>
+<p>
+This component is entirely Symbian-specific, and presently only Symbian builds of the logger program have a local control interface, implemented based on the Symbian client-server framework.
+</p>
+<a id="toc3" name="toc3"></a>
+<h2>1.2. daemon/</h2>
+<p>
+The logger program.
+</p>
+<p>
+Can be built both for Symbian and Linux, but the Linux variant has somewhat less functionality. At present support for Linux builds really only exists to allow for some of the functionality to be tested on the PC rather than on mobile.
+</p>
+<a id="toc4" name="toc4"></a>
+<h2>1.3. epocxplat/</h2>
+<p>
+A dynamic library for isolating Symbian platform ABI incompatibilities, so that the same daemon binary can be installed on all supported Symbian devices.
+</p>
+<p>
+A separate epocxplat DLL is built for each Symbian release, but this fact is hidden by including all the different builds in a single epocxplat SIS file, and by picking a compatible DLL during installation.
+</p>
+<a id="toc5" name="toc5"></a>
+<h2>1.4. filter-http/</h2>
+<p>
+A HTTP filter plugin DLL. The purpose of this plugin is to hook up with the Symbian HTTP framework sessions in order to notify the logger (or another interested process) of any URLs being requested.
+</p>
+<p>
+We do not know of any public (or private) Symbian API that could be used to directly observe HTTP requests from the logger, and hence the requirement to install this plugin in order for the logger to get notified regarding HTTP requests. If the plugin is not installed, then the logger will not receive said notifications, but there is no harm done otherwise.
+</p>
+<p>
+As this plugin automatically and intrusively hooks up with all <code>RHTTPSession</code> objects, it requires rather high Symbian platform security capabilities, and hence its use may not always be an option.
+</p>
+<a id="toc6" name="toc6"></a>
+<h2>1.5. keyevents/</h2>
+<p>
+The keyevents libraries (client side and server side), from <a href="http://code.google.com/p/jaikuengine-mobile-client/">Jaiku</a>.
+</p>
+<p>
+You must build this component first if you want to enable the anim-variant of the "keypress" sensor when building the logger program.
+</p>
+<p>
+This component is entirely Symbian-specific.
+</p>
+<a id="toc7" name="toc7"></a>
+<h2>1.6. launcher/</h2>
+<p>
+This serves as a launcher and "control panel" for the logger and watchdog programs.
+</p>
+<p>
+With this you can start and stop both the logger and the watchdog, or even forcefully kill them if necessary. You can also find out whether the logger and the watchdog are running. You can also enable/disable the launching of watchdog at device boot time.
+</p>
+<p>
+This program is primarily intended for developers and advanced users, and is generally not intended to be installed in trials.
+</p>
+<p>
+This component is entirely Symbian-specific, and implemented in Python for S60. The <a href="http://www.hiit.fi/files/fi/da/miso/utils/web/">Miso</a> library is required. For process killing to work, you must grant the PowerMgmt capability to the application.
+</p>
+<a id="toc8" name="toc8"></a>
+<h2>1.7. lua/</h2>
+<p>
+A Symbian port of <a href="http://www.lua.org/">Lua</a>.
+</p>
+<p>
+Some of the extras in this component come from the <a href="http://code.google.com/p/alua/">alua</a> project, but primarily this code comes from a recent mainline Lua release, tweaked slightly for Symbian. This code is built in statically to the logger program.
+</p>
+<a id="toc9" name="toc9"></a>
+<h2>1.8. megasis/</h2>
+<p>
+Build scripts for building a SIS file containing multiple components. This is intended to facilitate convenient deployment of the software.
+</p>
+<a id="toc10" name="toc10"></a>
+<h2>1.9. py-cl2-cli-lib/</h2>
+<p>
+A Python for S60 wrapper for the cxx-cl2-cli-lib library.
+</p>
+<a id="toc11" name="toc11"></a>
+<h2>1.10. qxmpp/</h2>
+<p>
+The <a href="http://code.google.com/p/qxmpp/">QXmpp</a> Jabber/XMPP library for Symbian. Builds both for Symbian and Linux. This library is used in implementing the remote control facility of the logger.
+</p>
+<p>
+Minor customizations have been made, and these are documented in the README-CL2 file.
+</p>
+<a id="toc12" name="toc12"></a>
+<h2>1.11. shared/</h2>
+<p>
+Somewhat general purpose C and C++ code.
+</p>
+<p>
+Code from here is intended to be built in directly to programs that need it. There are no makefiles for turning this code into a DLL or anything, and some of the code even refers to project defined preprocessor variables.
+</p>
+<a id="toc13" name="toc13"></a>
+<h2>1.12. sqlite3h/</h2>
+<p>
+A Symbian port of <a href="http://www.sqlite.org/">SQLite 3</a>.
+</p>
+<p>
+This code comes from a recent mainline SQLite release, and considerable changes have been made to get the code to work on Symbian. This code is built in statically to Symbian builds of the logger program. Recent versions of the Symbian Platform have SQLite built in (within Symbian SQL), and on such devices one presumably could and should dynamically link against the built-in database code, instead of building in this custom port. Unfortunately it seems that Symbian presently only provides a Symbian-specific interface to the SQL engine (see <code>sqldb.h</code>), and not the standard one, so this may not be possible yet.
+</p>
+<a id="toc14" name="toc14"></a>
+<h2>1.13. time-spec/</h2>
+<p>
+Code for parsing time moment and interval expressions.
+</p>
+<p>
+Implements a little language for specifying points in time, and time intervals. Presently the former kind of language is used in the logger to specify when to do uploads. The code is built in statically to the logger program. It is likely that the time expressions will eventually be given in Lua, for more code reuse and more expressiveness, but this component is used for now.
+</p>
+<p>
+Building this component from source requires the <a href="http://www.cs.queensu.ca/home/thurston/ragel/">Ragel</a> state machine generator.
+</p>
+<a id="toc15" name="toc15"></a>
+<h2>1.14. tools/</h2>
+<p>
+Some build-related tools.
+</p>
+<p>
+These are generally invoked directly by makefiles as required.
+</p>
+<a id="toc16" name="toc16"></a>
+<h2>1.15. watchdog/</h2>
+<p>
+The logger process watchdog.
+</p>
+<p>
+This a watchdog program that the system automatically starts up at system boot time. The watchdog program has the sole purpose of starting up the logging client and trying to ensure that it keeps running. The watchdog does this by observing the logger process, and recreating it (after some delay) if it should die. This component should be kept simple to reduce the risk of errors in the watchdog, as there is no one watching the watchdog.
+</p>
+<p>
+For the on-boot start up to work the executable must have a protected UID and sufficient capabilities.
+</p>
+<p>
+This component is entirely Symbian-specific.
+</p>
+
+<!-- xhtml code generated by txt2tags 2.5 (http://txt2tags.sf.net) -->
+<!-- cmdline: txt2tags -\-target xhtml -\-infile ../CONTENTS.txt -\-outfile contextlogger2/contents.html -\-encoding utf-8 -\-verbose -\-toc -C homepage/config.t2t -->
+</body></html>

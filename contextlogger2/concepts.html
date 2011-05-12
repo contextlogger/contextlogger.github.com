@@ -1,0 +1,156 @@
+<?xml version="1.0"
+      encoding="utf-8"
+?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/><link rel="shortcut icon" href="http://www.hiit.fi/sites/all/themes/hiit/favicon.ico" type="image/x-icon" /><link rel="stylesheet" href="hiit.css" type="text/css" />
+<title>ContextLogger2 Source Code Bits of Interest</title>
+<meta name="generator" content="http://txt2tags.sf.net" />
+</head>
+<body><table class="navi"><tr><th>Go to</th></td><tr><td><a href="../index.html">CL2</a></td></tr><tr><td><a href="http://hiit.fi/uix/">UIx</a></td></tr><tr><td><a href="http://hiit.fi/">HIIT</a></td></tr></table>
+<div align="center">
+<h1>ContextLogger2 Source Code Bits of Interest</h1>
+<h3>Thu May 12 15:19:48 2011</h3>
+</div>
+
+<p>
+Below is a list of pointers to some of the more interesting bits of
+code in the ContextLogger2 codebase, in the authors' opinion.
+The files listed are to the "main" files demonstrating the concept.
+</p>
+<table border="1" cellpadding="4">
+<tr>
+<th>Concept</th>
+<th>Description</th>
+<th>Files</th>
+</tr>
+<tr>
+<td>A generic AO that completes immediately</td>
+<td>A Symbian active object (AO) that does nothing but gives the event loop a chance to run before invoking its callback.</td>
+<td><a href="../../api/ut__immediate__epoc_8cpp_source.html">daemon/src/ut_immediate_epoc.cpp</a>, <a href="../../api/ut__immediate__epoc_8hpp_source.html">daemon/src/ut_immediate_epoc.hpp</a></td>
+</tr>
+<tr>
+<td>Catching SMS control messages</td>
+<td>Quietly observing and processing SMS control messages on Symbian.</td>
+<td><a href="../../api/kr__sms__trigger__epoc_8cpp_source.html">daemon/src/kr_sms_trigger_epoc.cpp</a>, <a href="../../api/kr__sms__trigger__epoc_8hpp_source.html">daemon/src/kr_sms_trigger_epoc.hpp</a></td>
+</tr>
+<tr>
+<td>Checking AP types</td>
+<td>Checking whether an access point with a given ID is a modem one (GSM) or not (WLAN).</td>
+<td><a href="../../api/epoc-iap_8cpp_source.html">daemon/src/epoc-iap.cpp</a></td>
+</tr>
+<tr>
+<td>Configuring Lua for Symbian</td>
+<td></td>
+<td><a href="../../api/luaconf_8h_source.html">lua/src/luaconf.h</a></td>
+</tr>
+<tr>
+<td>Configuring SQLite3 for Symbian</td>
+<td></td>
+<td><a href="../../api/sqlite3__config_8h_source.html">sqlite3h/src/sqlite3/sqlite3_config.h</a></td>
+</tr>
+<tr>
+<td>Double byte string / UTF-8 conversion utilities</td>
+<td>A number of different utility functions for conveniently converting between UTF-8 and the native UTF-16 encoding on Symbian.</td>
+<td><a href="../../api/utils__cl2_8h_source.html">daemon/src/utils_cl2.h</a>, <a href="../../api/utils__cl2__cxx_8cpp_source.html">daemon/src/utils_cl2_cxx.cpp</a></td>
+</tr>
+<tr>
+<td>Flexible error reporting</td>
+<td>A powerful set of functions and macros for handling error reporting for different error (object) types.</td>
+<td><a href="../../api/er__errors_8c_source.html">daemon/src/er_errors.c</a>, <a href="../../api/er__errors_8h_source.html">daemon/src/er_errors.h</a></td>
+</tr>
+<tr>
+<td>Gzipping files with Crypto++</td>
+<td>Straightforward gzip file compression with Crypto++.</td>
+<td><a href="../../api/ut__compress__cryptopp__gzip_8cpp_source.html">daemon/src/ut_compress_cryptopp_gzip.cpp</a></td>
+</tr>
+<tr>
+<td>Lua based config files</td>
+<td>Implementing a Lua language based configuration file, using a Lua runtime instance for in-memory storage.</td>
+<td><a href="../../api/cf__rcfile_8cpp_source.html">daemon/src/cf_rcfile.cpp</a>, <a href="../../api/cf__rcfile_8h_source.html">daemon/src/cf_rcfile.h</a></td>
+</tr>
+<tr>
+<td>Multipart HTTP posting</td>
+<td>Multipart HTTP(S) POSTing using the Symbian HTTP client API.</td>
+<td><a href="../../api/up__poster__epoc_8cpp_source.html">daemon/src/up_poster_epoc.cpp</a>, <a href="../../api/up__poster__epoc_8hpp_source.html">daemon/src/up_poster_epoc.hpp</a></td>
+</tr>
+<tr>
+<td>Multipart HTTP posting (Qt)</td>
+<td>Multipart HTTP(S) POSTing using the QtNetwork API.</td>
+<td><a href="../../api/up__uploader__qt_8cpp_source.html">daemon/src/up_uploader_qt.cpp</a>, <a href="../../api/up__uploader__qt__private_8hpp_source.html">daemon/src/up_uploader_qt_private.hpp</a></td>
+</tr>
+<tr>
+<td>Observing SMS events</td>
+<td>Detecting and getting information about incoming and outgoing SMS messages.</td>
+<td><a href="../../api/epoc-smsevent_8cpp_source.html">daemon/src/epoc-smsevent.cpp</a>, <a href="../../api/ut__sms__epoc_8cpp_source.html">daemon/src/ut_sms_epoc.cpp</a></td>
+</tr>
+<tr>
+<td>Observing call status events</td>
+<td>Detecting phone call status changes and querying for additional information about any call.</td>
+<td><a href="../../api/epoc-callstatus_8cpp_source.html">daemon/src/epoc-callstatus.cpp</a></td>
+</tr>
+<tr>
+<td>Phone number to contact name</td>
+<td>Resolving a phone number to the name of a matching contact on Symbian.</td>
+<td><a href="../../api/ut__telno__epoc_8cpp_source.html">daemon/src/ut_telno_epoc.cpp</a></td>
+</tr>
+<tr>
+<td>Portable assertions</td>
+<td>Assertions that are actually visible or logged on Symbian.</td>
+<td><a href="../../api/assertions_8h_source.html">shared/common/assertions.h</a>, <a href="../../api/assertions__cxx_8cpp_source.html">shared/common/assertions_cxx.cpp</a></td>
+</tr>
+<tr>
+<td>Portable logging</td>
+<td>Logging to a file on Symbian, and to console elsewhere.</td>
+<td><a href="../../api/logging_8cpp_source.html">shared/common/logging.cpp</a>, <a href="../../api/logging__c_8h_source.html">shared/common/logging_c.h</a></td>
+</tr>
+<tr>
+<td>Porting SQLite3 to Symbian</td>
+<td></td>
+<td><a href="../../api/os__symbian_8c_source.html">sqlite3h/src/sqlite3/os_symbian.c</a></td>
+</tr>
+<tr>
+<td>QIODevice input device composing sub-QIODevices</td>
+<td>An abstraction for reading sequentially from multiple QIODevices.</td>
+<td><a href="../../api/iodeviceseq__qt_8cpp_source.html">daemon/src/iodeviceseq_qt.cpp</a>, <a href="../../api/iodeviceseq__qt_8hpp_source.html">daemon/src/iodeviceseq_qt.hpp</a></td>
+</tr>
+<tr>
+<td>QXmpp and Lua based remote control mechanism</td>
+<td>Accepting remote commands via XMPP and executing them using a Lua runtime.</td>
+<td><a href="../../api/rk__remokon__qt_8cpp_source.html">daemon/src/rk_remokon_qt.cpp</a>, <a href="../../api/rk__remokon__qt_8hpp_source.html">daemon/src/rk_remokon_qt.hpp</a></td>
+</tr>
+<tr>
+<td>Resolving AP names</td>
+<td>Resolving an access point name to its ID on Symbian.</td>
+<td><a href="../../api/epoc-iap_8cpp_source.html">daemon/src/epoc-iap.cpp</a></td>
+</tr>
+<tr>
+<td>Simple file compression</td>
+<td>Straightforward file compression based on (raw) zlib.</td>
+<td><a href="../../api/ut__compress__zlib__raw_8c_source.html">daemon/src/ut_compress_zlib_raw.c</a></td>
+</tr>
+<tr>
+<td>Timer-based retries on Symbian</td>
+<td>An API that encapsulates logic for repeating failed operations after increasing (and semi-randomized) time intervals.</td>
+<td><a href="../../api/ut__retry__epoc_8cpp_source.html">daemon/src/ut_retry_epoc.cpp</a>, <a href="../../api/ut__retry__epoc_8hpp_source.html">daemon/src/ut_retry_epoc.hpp</a></td>
+</tr>
+<tr>
+<td>Tracking application focus on Symbian</td>
+<td>Keeping track of which application has the focus.</td>
+<td><a href="../../api/epoc-appfocus_8cpp_source.html">daemon/src/epoc-appfocus.cpp</a>, <a href="../../api/epoc-appfocus_8hpp_source.html">daemon/src/epoc-appfocus.hpp</a></td>
+</tr>
+<tr>
+<td>Tracking music playback on Symbian</td>
+<td>Receiving events from the Music player on Symbian.</td>
+<td><a href="../../api/epoc-music_8cpp_source.html">daemon/src/epoc-music.cpp</a>, <a href="../../api/epoc-music_8hpp_source.html">daemon/src/epoc-music.hpp</a></td>
+</tr>
+</table>
+
+<hr class="light" />
+<p>
+<a href="http://hiit.fi/u/hasu/">Tero Hasu</a>
+</p>
+
+<!-- xhtml code generated by txt2tags 2.5 (http://txt2tags.sf.net) -->
+<!-- cmdline: txt2tags -\-target xhtml -\-infile /tmp/concepts.txt2tags.txt -\-outfile contextlogger2/concepts.html -\-encoding utf-8 -\-verbose -C homepage/config.t2t -->
+</body></html>

@@ -1,0 +1,150 @@
+<?xml version="1.0"
+      encoding="utf-8"
+?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/><link rel="shortcut icon" href="http://www.hiit.fi/sites/all/themes/hiit/favicon.ico" type="image/x-icon" /><link rel="stylesheet" href="hiit.css" type="text/css" /><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/><link rel="shortcut icon" href="http://www.hiit.fi/sites/all/themes/hiit/favicon.ico" type="image/x-icon" /><link rel="stylesheet" href="hiit.css" type="text/css" />
+<title>ContextLogger2 OAQ (Occasionally Asked Questions)</title>
+<meta name="generator" content="http://txt2tags.sf.net" />
+</head>
+<body><table class="navi"><tr><th>Go to</th></td><tr><td><a href="../index.html">CL2</a></td></tr><tr><td><a href="http://hiit.fi/uix/">UIx</a></td></tr><tr><td><a href="http://hiit.fi/">HIIT</a></td></tr></table>
+<div align="center">
+<h1>ContextLogger2 OAQ (Occasionally Asked Questions)</h1>
+<h3>Wed Sep 15 18:44:41 2010</h3>
+</div>
+
+<ol>
+<li>Is <b>introducing new sensors</b> easy?
+
+  <ul>
+  <li>We've tried to avoid any arduous requirements that would make it harder to implement new sensors than it already is.
+  
+  </li>
+  <li>Basically, sensor scanners may be implemented in C, C++, or Lua. They are objects for which at least two operations must be defined, namely create and destroy, but there is no particular class interface to implement or anything. They must observe for sensor events without busy looping or blocking the main thread; typically on Symbian they would play ball with the Symbian event loop. There is no requirement as to sensor data representation, the scanner must simply insert the data into an SQLite database using whatever format or schema they like. Errors are generally to be handled internally, and possibly logged; there is the option of requesting the whole logger process to exit, to possibly be recreated later by the watchdog. That is basically it.
+  
+  </li>
+  </ul>
+</li>
+<li><b>How much data</b> does CL2 approximately collect per week?
+
+  <ul>
+  <li>A lot depends on the sensor set used, the sampling frequency, and the amount of activity on the phone, but for instance one 1-month long test run yielded slightly less than 2 MB worth of data.
+  
+  </li>
+  </ul>
+</li>
+<li>Is <b>installation</b> only a matter of installing a single client on the device, without anything else being required?
+
+  <ul>
+  <li>Things are almost that simple but not quite. Only a single piece of client software is required to collect data, but that client must be started somehow. The different options include:
+  
+    <ul>
+    <li>One option is to embed the client in another application, in which case it will run when the host application is running. 
+    
+    </li>
+    <li>There is also the option of building the client with a (very basic) GUI of its own, in which case it can be started and stopped easily, and can run independent of any other application.
+    
+    </li>
+    <li>A typical solution would be to install the watchdog program, which takes care of starting the logger client.
+    
+    </li>
+    <li>Yet another option is to install the provided launcher application, and use that to control the logger client.
+    
+    </li>
+    </ul>
+  </li>
+  </ul>
+</li>
+<li>Does CL also collect the <b>UIDs of applications</b> (so that one need not identify focused applications based on their name alone).
+
+  <ul>
+  <li>Yes.
+  
+  </li>
+  </ul>
+</li>
+<li>Is it possible to send trial users questions by having CL2 present pop-up dialogs to the users? In other words, is <b>"experience sampling"</b> supported?
+
+  <ul>
+  <li>No, and this feature is not on the roadmap.
+  
+  </li>
+  </ul>
+</li>
+<li>What <b>devices</b> are supported?
+
+  <ul>
+  <li>In principle all S60 3rd and 5th Edition devices should be supported, at least when it comes to basic functionality. (The software may work on Symbian^3 devices, but we have yet to test this.) Not all functionality is necessarily available on all devices, as some of the functionality is implemented in terms of APIs that are not available on all platform versions. Also, we have not tested the software on the multitude of different S60 phones. We primarily test on S60 3rd FP1 and S60 5th devices.
+  
+  </li>
+  </ul>
+</li>
+<li>What <b>format</b> is the data in?
+
+  <ul>
+  <li>In SQLite3 database file format. The format is, to our knowledge, platform independent.
+  
+  </li>
+  <li>The database schemas we are using are rather simplistic, but these can be changed as required to better support efficient on-device queries.
+  
+  </li>
+  </ul>
+</li>
+<li>How can one get <b>access to the data</b>?
+
+  <ul>
+  <li>One can simply copy the data file off the device. There is also support for uploading said files automatically at predefined times via HTTP or HTTP over SSL.
+  
+  </li>
+  <li>Support for doing queries on the active dataset from other local applications (via the Symbian client/server protocol) and from remote applications (via XMPP) is partially implemented.
+  
+  </li>
+  </ul>
+</li>
+<li>Who <b>owns the data</b>?
+
+  <ul>
+  <li>This is not our concern. The data collected by CL2 does not go to HIIT servers unless CL2 is specifically configured to upload it there.
+  
+  </li>
+  </ul>
+</li>
+<li>Is the <b>privacy and anonymity</b> of users guaranteed?
+
+  <ul>
+  <li>The data that is on the device is not encrypted. Uploads are optional, and can optionally be done over SSL. SSL provides server authentication and confidenciality of the data while in transit. A username is sent alongside each upload.
+  
+  </li>
+  <li>These factors are just one part of the overall privacy/anonymity picture, and as such neither guarantee or preclude privacy and anonymity of users.
+  
+  </li>
+  </ul>
+</li>
+<li>Is it possible for <b>users to view the data</b> being collected regarding their device use?
+
+  <ul>
+  <li>There is no plan to provide a user-friendly interface for this purpose, but neither are we planning to take steps to prevent people from being able to access the data.
+  
+  </li>
+  <li>Something to note, though, is that once a chunk of data is uploaded to a server, the local copy is deleted.
+  
+  </li>
+  </ul>
+</li>
+<li>Does the software really work on the <b>Nokia N80</b>?
+
+  <ul>
+  <li>Yes, but the system software has to be bug-free enough, so upgrade to more recent firmware as necessary. Version 5.0719.0.2 at least should work, but is not available for all regions, so you may have to change the product code of your phone to be able to get the upgrade.
+  </li>
+  </ul>
+</li>
+</ol>
+
+<hr class="light" />
+<p>
+<a href="http://hiit.fi/u/hasu/">Tero Hasu</a>
+</p>
+
+<!-- xhtml code generated by txt2tags 2.5 (http://txt2tags.sf.net) -->
+<!-- cmdline: txt2tags -\-target xhtml -\-infile homepage/faq.txt2tags.txt -\-outfile contextlogger2/faq.html -\-encoding utf-8 -C homepage/config.t2t -->
+</body></html>

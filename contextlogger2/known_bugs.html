@@ -1,0 +1,73 @@
+<?xml version="1.0"
+      encoding="utf-8"
+?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/><link rel="shortcut icon" href="http://www.hiit.fi/sites/all/themes/hiit/favicon.ico" type="image/x-icon" /><link rel="stylesheet" href="hiit.css" type="text/css" /><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/><link rel="shortcut icon" href="http://www.hiit.fi/sites/all/themes/hiit/favicon.ico" type="image/x-icon" /><link rel="stylesheet" href="hiit.css" type="text/css" />
+<title>ContextLogger2 Known Defects</title>
+<meta name="generator" content="http://txt2tags.sf.net" />
+</head>
+<body><table class="navi"><tr><th>Go to</th></td><tr><td><a href="../index.html">CL2</a></td></tr><tr><td><a href="http://hiit.fi/uix/">UIx</a></td></tr><tr><td><a href="http://hiit.fi/">HIIT</a></td></tr></table>
+<div align="center">
+<h1>ContextLogger2 Known Defects</h1>
+<h3>Tue Apr 26 13:40:57 2011</h3>
+</div>
+
+<ul>
+<li><b>Proximity</b> sensor may produce events too frequently for the current write-to-file-immediately logging to be sensible. Should optimize.
+
+</li>
+<li>Support for <b>system backups</b> of the CL2 libraries has not been fully implemented/tested. See recent PyS60 releases for more on this, or <a href="http://wiki.forum.nokia.com/index.php/TSS001073_-_Backup_of_add-on_DLLs">http://wiki.forum.nokia.com/index.php/TSS001073_-_Backup_of_add-on_DLLs</a>. We should add support for url plugin, epocxplat lib, cxx lib, py lib, and miso lib.
+
+</li>
+<li>QXmpp sessions sometimes fail on Symbian^3 for some reason, and result in repeated socket errors, indefinitely, seemingly without being able to ever recreate the session. The socket error being repeated is <code>QAbstractSocket::HostNotFoundError</code> (2). The retry frequency does not decrease as it should, suggesting that the failure counter is not being incremented. There is a possibly related <a href="http://bugreports.qt.nokia.com/browse/QTBUG-8687">Qt bug report</a>.
+
+</li>
+<li>Some our Qt code may leak resources if an exception occurs in a class constructor.
+
+</li>
+<li>The <b>Qt-based</b> uploader does not have <b>IAP selection</b> code for Symbian, which it really should have to honor roaming settings etc. Although things work quite well without on Symbian^3, which tends to be more automatic when it comes to creating connections. <code>QNetworkConfigurationManager</code> does not appear to currently list any configurations on Symbian^3, which may be a bug in Qt. (It does list something on S60 v5.0.)
+
+</li>
+<li>There is flight mode observing in the call status sensor. To avoid duplication of logic, should get this information via the blackboard. (More maintainable, and likely more efficient as well.)
+
+</li>
+<li>The <b>remote REPL</b> could be nicer; it presently does not deal with multiple return values, nor does it turn non-string-coercable values into something printable. Another problem is that the <code>print</code> function prints to the console, which may not make sense on a phone, or it may be intrusive if there is a pop-up. These two issues could perhaps be addressed together by modifying the <code>print</code> function to print into a buffer, and then sending that buffer back as the reply if there is no return value from the Lua expression. Printing does coerce all values into strings.
+
+</li>
+<li>Check if data connections or BT scans <b>interfere with phone calls</b>; if so, should perhaps stop interfering scanners for the duration of any phone call.
+
+</li>
+<li>Check if phone calls interfere with remokon connections, and deal with it somehow. Certainly it would seem that a phone call can end the remokon connection (it does not always), but this does not necessarily even get noticed, unless there are write attempts.
+
+</li>
+<li>Lua <b>error reporting</b> does not work correctly when the logger is built for Symbian with GCCE v3, as we do. This is due to a compiler bug, for which we have implemented a workaround such that the error messages look strange and incomplete. We should try building with GCCE v4, and adjust the SDK(s) so that the tools and headers are compatible with both GCCE v3 and v4 rather than just v3.
+
+</li>
+<li>The <b>Symbian client/server</b> interface is not fully implemented, making it presently impossible to receive the result when evaluating a Lua expression that produces a long (textual) result. This is not difficult to implement, but as of yet we have not had the need to implement the full interface.
+
+</li>
+<li>If daemon exits in the middle of database schema creation, and this will cause a fatal error upon SQL prepared statement generation next time around. And the next. And the next.
+
+</li>
+<li>The <b>Qxmpp</b> library does not use <code>q_check_ptr</code> to check for <code>new</code> success, which should really be done to support Symbian default behavior.
+
+</li>
+<li>Upon a sudden <code>ExitApplication</code> we are getting "Lbs Client Fault" 16 initiated on us by the positioning server ("if the outstanding notification requests are not cancelled before calling RPositionServer::Close"). It is a bit strange that we would not be allowed to <code>Exit</code> before doing some cleanup to avoid making some service unhappy. (Given the design of the client-server framework, designed to support resource cleanup in such situations.) It may not make sense to try to fix this, as really it is the positioning server in the wrong here.
+
+</li>
+<li>The Symbian-based uploader consistently crashes after each upload on Symbian^3, which may be a bug the Symbian^3 implementation of <code>RHTTPSession</code> and co. Until this issue has been resolved, the Qt-based uploader may be used instead on Symbian^3.
+
+</li>
+<li>Symbian builds do not support nested C++ exceptions. This affects Qt, and may hence also affect CL2 when Qt is being used. <a href="http://bugreports.qt.nokia.com/browse/QTBUG-4852">Qt bug report</a>.
+</li>
+</ul>
+
+<hr class="light" />
+<p>
+<a href="http://hiit.fi/u/hasu/">Tero Hasu</a>
+</p>
+
+<!-- xhtml code generated by txt2tags 2.5 (http://txt2tags.sf.net) -->
+<!-- cmdline: txt2tags -\-target xhtml -\-infile homepage/known_bugs.txt2tags.txt -\-outfile contextlogger2/known_bugs.html -\-encoding utf-8 -C homepage/config.t2t -->
+</body></html>

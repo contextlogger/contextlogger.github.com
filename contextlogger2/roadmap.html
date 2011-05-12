@@ -1,0 +1,89 @@
+<?xml version="1.0"
+      encoding="utf-8"
+?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/><link rel="shortcut icon" href="http://www.hiit.fi/sites/all/themes/hiit/favicon.ico" type="image/x-icon" /><link rel="stylesheet" href="hiit.css" type="text/css" /><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/><link rel="shortcut icon" href="http://www.hiit.fi/sites/all/themes/hiit/favicon.ico" type="image/x-icon" /><link rel="stylesheet" href="hiit.css" type="text/css" />
+<title>ContextLogger2 Roadmap</title>
+<meta name="generator" content="http://txt2tags.sf.net" />
+</head>
+<body><table class="navi"><tr><th>Go to</th></td><tr><td><a href="../index.html">CL2</a></td></tr><tr><td><a href="http://hiit.fi/uix/">UIx</a></td></tr><tr><td><a href="http://hiit.fi/">HIIT</a></td></tr></table>
+<div align="center">
+<h1>ContextLogger2 Roadmap</h1>
+<h3>Fri Apr  1 13:59:00 2011</h3>
+</div>
+
+<ul>
+<li>It would be good to have a <b>descriptive error dialog</b> should there be an error parsing/evaluating the contents of any <b>configuration file</b>.
+
+</li>
+<li>Create/find Lua bindings for sqlite3 database access. Adapt for log database (LogDb) access; this will allow for <b>database queries via the Symbian client/server interface</b>, and later remotely. See <code>libluasqlite3.c</code> in the codebase. We can remove database opening/closing functions, and just export a handle to the one database that we do have.
+
+</li>
+<li>An end-user <b>logger control panel</b> application. Something simple and pretty, just for starting and stopping logger and watchdog. Based on Qt, probably.
+
+</li>
+<li><b>WLAN scanning</b> would be a useful addition for collecting location data. Look at the wlantools Python extension, or at <a href="https://www.iyouit.eu/portal/Software.aspx">WLANMgmt</a>. Alternatively: it seems that Symbian^3 devices support 'Wi-Fi/Network' positioning, and we might be able to just use an <code>RPositioner</code> to get position information based on WLAN information, say in the <code>cellpos</code> sensor, after cell ID changes.
+
+</li>
+<li>Implement a cross-platform sensor based on each of the following <a href="http://doc.qt.nokia.com/qtmobility-1.1.0/sensors-api.html">Qt Mobility Sensors API</a> sensors: QAccelerometerSensor, QCompassSensor, QOrientationSensor, and QRotationSensor. See also Symbian <a href="http://library.forum.nokia.com/topic/S60_5th_Edition_Cpp_Developers_Library/GUID-759FBC7F-5384-4487-8457-A8D4B76F6AA6/html/Sensor_Channel_APIIndexPage.html">Sensor Channel API</a> for info on the underlying sensor interface. Note that the polling Qt-based sensors are IPC heavy as revealed by <code>sensorbackendsym.cpp</code>, which requests readings without any buffering. Specifying a <code>dataRate</code> may be important.
+
+</li>
+<li>Grab an SMS sending function (some new Nokia libs out there make this really easy). Create a Lua binding. Also define an sqlite function for evaling a Lua expression. This makes it possible to remotely set up <b>database triggers that send notifications via SMS</b>. May want to restrict numbers for security, no premium numbers please; specify a number validator in Ragel.
+
+</li>
+<li>A <b>status indicator</b> that shows whether the logger is running, on the standby screen. ContextPhone has this, and we can perhaps use the same code; see <code>ContextNotify</code> (server drawing on top of Phone screen) and <code>ContextNotifyClient</code> (driving the thing); this solution is a klugde, though, but the only thing that one can do pre-N97 without being a manufacturer.
+
+</li>
+<li>A proper <b>status indicator</b> for devices with N97 style standby screen. On the N97 (only) there is the <a href="http://library.forum.nokia.com/topic/S60_5th_Edition_Cpp_Developers_Library/GUID-759FBC7F-5384-4487-8457-A8D4B76F6AA6/html/Home_Screen_Publishing_APIIndexPage.html">Home Screen Publishing API</a> that we can use instead of more kludgey solutions.
+
+</li>
+<li>Could use some <b>Lua bindings for Remokon</b> access. Start, stop, is running, is connected, is enabled, send given message to given JID, etc. Add Remokon submenu to Launcher.
+
+</li>
+<li>Could use a command for <b>resetting Lua state</b> in remote control sessions, to prevent running out of memory in cases where say a lot of variables are assigned to in the "REPL". This may be the one thing that perhaps should not be done in Lua itself, as it might be hard to do it safely.
+
+</li>
+<li><b>Authenticate uploaders</b>. Presently, there is server authentication and confidentiality for uploads, but no client authentication. Hence unauthorized parties may do uploads, and impersonation is possible, and this should be addressed by utilizing a shared secret, most likely. HTTP may have its own authentication methods. TLS is supposed to allow for authentication of both endpoints. The SASL protocol may be an option for implementing challenge/response authentication in a standard way, if suitable implementations are available. Use of authorization certificates (rather than authenticating) is also an option. See the <a href="http://sw.nokia.com/id/a60ed5ab-c2fc-486c-89d0-2695b67ffec4/Installing_Certificates_to_S60_3rd_Edition_Devices_v1_1_en.pdf">Forum Nokia document</a> which discusses installing client authentication cert installation.
+
+</li>
+<li><b>More expressive time specifications.</b> Implement/find Unix time processing functions for Lua. (The "os" module has some, but they may not be sufficient.) These will allow Uploader time expressions to be given in Lua rather than the less expressive language we currently use, and this will actually reduce the size of the binary. Modify Uploader accordingly.
+
+</li>
+<li><b>Call recording</b> would be nice. ContextPhone has this.
+
+</li>
+<li>Timed or event-triggered <b>microphone</b> audio sampling would not hurt either. <a href="http://sourceforge.net/projects/mobilestk/">Mobile STK</a> has example code for doing audio recording on Symbian. The <a href="http://wiki.forum.nokia.com/index.php/Media_Recorder_API">Media Recorder API</a> sounds related.
+<a href="http://wiki.forum.nokia.com/index.php/MMFDevSound_API">MMFDevSound API</a> might also be. Using Qt might also be an option, see <code>QAudioCaptureSource</code> and <code>QMediaRecorder</code> in the Multimedia API of <a href="http://qt.nokia.com/products/qt-addons/mobility/">Qt Mobility</a>, and <a href="http://qt.gitorious.org/qt-mobility/serviceframework/trees/master/examples/audiorecorder">http://qt.gitorious.org/qt-mobility/serviceframework/trees/master/examples/audiorecorder</a> for an example application.
+
+</li>
+<li><b>More sensors</b>: lock status, visible WLAN nodes, light status, <a href="http://wiki.forum.nokia.com/index.php/KCoreAppUIsNewEmailStatus_API">new email status</a>, <a href="http://wiki.forum.nokia.com/index.php/KAccessoryModeChanged_API">accessory mode change</a>, &#8230;
+
+</li>
+<li>As an optimization, the Symbian <b>local server interface</b> should be updated to create only a <b>single Lua state instance per session</b>, rather than one per command. This also increases code duplication as it then becomes possible to give some Lua definitions only once per session. The Launcher might be modified to take advantage of this, to create a session only once per command sequence.
+
+</li>
+<li>The <b>N97</b> supports a new <a href="http://library.forum.nokia.com/topic/S60_5th_Edition_Cpp_Developers_Library/GUID-759FBC7F-5384-4487-8457-A8D4B76F6AA6/html/OOM_Monitor_APIIndexPage.html">OOM Monitor Client API</a>. We might want to be using this for better <b>system-wide low-memory condition handling</b>.
+
+</li>
+<li><b>Sandbox mobile code.</b> Add privilege support to Lua VM. Flag to VM and checks to dangerous bindings. Mobile code may not execute privileged functions. Or it may be enough to simply choose carefully what libraries to make available to a given Lua instance. But any of this will not be useful until significant functionality is implemented internally for Lua, and said functionality requires dangerous operations.
+
+</li>
+<li>After-checkout <b>source tree preparation</b>. Building the logger, freshly checked out with Git, is not straightforward when relying on standard tools such as ABLD and Carbide. Have a single platform-agnostic script at the root of the repo that produces the generated source files for all components, and also creates standard <code>group</code> directories with project files for some sensible default configuration. This should make it easier to get started. For added convenience, might even generate Carbide projects files if there is a tool that supports their creation.
+
+</li>
+<li>A <b>MeeGo</b>, <b>iPhone</b> (jailbroken), <b>Android</b>, or <b>Bada</b> port would be of interest.
+
+</li>
+<li>Ovi <b>Notifications API</b> based transport option for remote control. Presumably costs hardly anything if there is any other application also using the API. See the <a href="http://blogs.forum.nokia.com/blog/long-live-your-mobile-battery/2010/09/29/ovi-notifications-api-intelligent-way-to-stay-connected-to-the-network">announcement</a>. There is also a <a href="http://www.forum.nokia.com/info/sw.nokia.com/id/04ccf534-f03d-404b-9fd6-debc186dc05d/Notifications_API_WP_Dec.pdf.html">white paper</a> and a <a href="https://projects.forum.nokia.com/notificationsapi">project page</a>. Still in beta.
+</li>
+</ul>
+
+<hr class="light" />
+<p>
+<a href="http://hiit.fi/u/hasu/">Tero Hasu</a>
+</p>
+
+<!-- xhtml code generated by txt2tags 2.5 (http://txt2tags.sf.net) -->
+<!-- cmdline: txt2tags -\-target xhtml -\-infile homepage/roadmap.txt2tags.txt -\-outfile contextlogger2/roadmap.html -\-encoding utf-8 -C homepage/config.t2t -->
+</body></html>
