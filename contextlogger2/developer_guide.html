@@ -10,7 +10,7 @@
 <body><table class="navi"><tr><th>Go to</th></td><tr><td><a href="../index.html">CL2</a></td></tr><tr><td><a href="http://hiit.fi/uix/">UIx</a></td></tr><tr><td><a href="http://hiit.fi/">HIIT</a></td></tr></table>
 <div align="center">
 <h1>ContextLogger2 Hacking</h1>
-<h3>Sun Jun  5 22:56:08 2011</h3>
+<h3>Sun Jun  5 23:38:41 2011</h3>
 </div>
 
 
@@ -19,17 +19,19 @@
   <ol>
   <li><a href="#toc1">Logger</a>
     <ul>
-    <li><a href="#toc2">1.1. General Design Guidelines</a>
+    <li><a href="#toc2">1.1. Design Overview</a>
     </li>
-    <li><a href="#toc3">1.2. Adding a New Sensor</a>
+    <li><a href="#toc3">1.2. General Design Guidelines</a>
+    </li>
+    <li><a href="#toc4">1.3. Adding a New Sensor</a>
     </li>
     </ul>
   </li>
-  <li><a href="#toc4">Watchdog</a>
+  <li><a href="#toc5">Watchdog</a>
   </li>
-  <li><a href="#toc5">Tools</a>
+  <li><a href="#toc6">Tools</a>
     <ul>
-    <li><a href="#toc6">3.1. Koog</a>
+    <li><a href="#toc7">3.1. Koog</a>
     </li>
     </ul>
   </li>
@@ -41,7 +43,12 @@
 <a id="toc1" name="toc1"></a>
 <h1>1. Logger</h1>
 <a id="toc2" name="toc2"></a>
-<h2>1.1. General Design Guidelines</h2>
+<h2>1.1. Design Overview</h2>
+<p>
+The solution is based on client software installed on a phone that (typically) runs on the background, unintrusively recording information about activities taking place on the phone. The implementation makes heavy use of event-driven programming, an <a href="http://www.sqlite.org/">SQLite</a> database engine, and a <a href="http://www.lua.org/">Lua</a> runtime. More specifically: each &ldquo;sensor&rdquo; runs independently as its own &ldquo;active object&rdquo;, reacting to system events; all persistent data (including any logged data) is managed with SQLite; and configurability of the system revolves around the lightweight dynamic language Lua.
+</p>
+<a id="toc3" name="toc3"></a>
+<h2>1.2. General Design Guidelines</h2>
 <p>
 The implementation of the logger daemon has been influenced by these guidelines:
 </p>
@@ -125,8 +132,8 @@ The implementation of the logger daemon has been influenced by these guidelines:
 </li>
 </ul>
 
-<a id="toc3" name="toc3"></a>
-<h2>1.2. Adding a New Sensor</h2>
+<a id="toc4" name="toc4"></a>
+<h2>1.3. Adding a New Sensor</h2>
 <p>
 The steps to take when adding a new sensor are typically like this:
 </p>
@@ -158,16 +165,16 @@ As an example of the code required for a single sensor, below is a patch showing
 </li>
 </ul>
 
-<a id="toc4" name="toc4"></a>
+<a id="toc5" name="toc5"></a>
 <h1>2. Watchdog</h1>
 <ul>
 <li><a href="states.png">state graph</a>
 </li>
 </ul>
 
-<a id="toc5" name="toc5"></a>
-<h1>3. Tools</h1>
 <a id="toc6" name="toc6"></a>
+<h1>3. Tools</h1>
+<a id="toc7" name="toc7"></a>
 <h2>3.1. Koog</h2>
 <p>
 <a href="../koog/">Koog</a> is a mixed-code generation tool that we have used in maintaining the logger codebase, mostly interactively under Emacs. In case you're wondering about the <code>/***koog***//***end***/</code> style comments found in the code. If these comments get on the way, feel free to delete them. It <i>is</i> quite possible to maintain the boilerplate code manually as well.
