@@ -4,23 +4,22 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/><link rel="shortcut icon" href="http://www.hiit.fi/sites/all/themes/hiit/favicon.ico" type="image/x-icon" /><link rel="stylesheet" href="hiit.css" type="text/css" /><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/><link rel="shortcut icon" href="http://www.hiit.fi/sites/all/themes/hiit/favicon.ico" type="image/x-icon" /><link rel="stylesheet" href="hiit.css" type="text/css" />
-<title>ContextLogger2 Known Defects</title>
+<title>ContextLogger2 Defects and Feature Requests</title>
 <meta name="generator" content="http://txt2tags.sf.net" />
 </head>
 <body><table class="navi"><tr><th>Go to</th></td><tr><td><a href="../index.html">CL2</a></td></tr><tr><td><a href="http://hiit.fi/uix/">UIx</a></td></tr><tr><td><a href="http://hiit.fi/">HIIT</a></td></tr></table>
 <div align="center">
-<h1>ContextLogger2 Known Defects</h1>
-<h3>Thu May 12 14:23:58 2011</h3>
+<h1>ContextLogger2 Defects and Feature Requests</h1>
+<h3>Mon Jun  6 00:16:47 2011</h3>
 </div>
 
+<h1>1. Bug Reports and Feature Requests</h1>
+<p>
+To report a bug or to request a feature, either send email or use the <a href="https://github.com/contextlogger/bugs/issues">issue tracking system</a>.
+</p>
+<h1>2. Known Defects Specific to Symbian</h1>
 <ul>
-<li><b>Proximity</b> sensor may produce events too frequently for the current write-to-file-immediately logging to be sensible. Should optimize.
-
-</li>
 <li>Support for <b>system backups</b> of the CL2 libraries has not been fully implemented/tested. See recent PyS60 releases for more on this, or <a href="http://wiki.forum.nokia.com/index.php/TSS001073_-_Backup_of_add-on_DLLs">http://wiki.forum.nokia.com/index.php/TSS001073_-_Backup_of_add-on_DLLs</a>. We should add support for url plugin, epocxplat lib, cxx lib, py lib, and miso lib.
-
-</li>
-<li>QXmpp sessions sometimes fail on Symbian^3 for some reason, and result in repeated socket errors, indefinitely, seemingly without being able to ever recreate the session. The socket error being repeated is <code>QAbstractSocket::HostNotFoundError</code> (2). The retry frequency does not decrease as it should, suggesting that the failure counter is not being incremented. There is a possibly related <a href="http://bugreports.qt.nokia.com/browse/QTBUG-8687">Qt bug report</a>.
 
 </li>
 <li>Some our Qt code may leak resources if an exception occurs in a class constructor.
