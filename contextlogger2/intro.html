@@ -1,0 +1,94 @@
+<?xml version="1.0"
+      encoding="utf-8"
+?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/><link rel="shortcut icon" href="http://www.hiit.fi/sites/all/themes/hiit/favicon.ico" type="image/x-icon" /><link rel="stylesheet" href="hiit.css" type="text/css" />
+<title>Introduction to ContextLogger2</title>
+<meta name="generator" content="http://txt2tags.sf.net" />
+</head>
+<body><table class="navi"><tr><th>Go to</th></td><tr><td><a href="../index.html">CL2</a></td></tr><tr><td><a href="http://hiit.fi/uix/">UIx</a></td></tr><tr><td><a href="http://hiit.fi/">HIIT</a></td></tr></table>
+<div align="center">
+<h1>Introduction to ContextLogger2</h1>
+<h3>Mon Jun  6 22:24:17 2011</h3>
+</div>
+
+
+<hr class="light" />
+
+  <ol>
+  <li><a href="#toc1">Motivation</a>
+  </li>
+  <li><a href="#toc2">Goals</a>
+  </li>
+  <li><a href="#toc3">Current Solution</a>
+  </li>
+  </ol>
+
+
+<hr class="light" />
+
+<a id="toc1" name="toc1"></a>
+<h1>1. Motivation</h1>
+<p>
+The smartphone's ubiquity has made it interesting for social sciences. A large fraction of people carries one willingly, and a smartphone integrates a number of technologies for automatic observation and can communicate with remote researchers. Smartphone loggers allow unobtrusive and cost-effective access to previously inaccessible sources of data on everyday behavior, such as auditory environment, proximity of other users, phone calls, and patterns of movement.
+</p>
+<p>
+Unfortunately, adoption has been slow, one reason  being that the available loggers do not support large-scale research. For a multitude of  reasons, smartphone-based research in its present form is expensive.
+</p>
+<a id="toc2" name="toc2"></a>
+<h1>2. Goals</h1>
+<p>
+The goal of ContextLogger2 is to support larger-scale research. Characteristic of large-scale research is, naturally,  user populations measured in hundreds and  thousands rather than in tens, and durations  ranging from months and years. Over several studies with ContextLogger1, we learned that the logger decisively affects cost-efficiency. The  logger affects recruitment and training of research personnel, preparation  of a trial, support needed during  it, ability to intervene upon problems, ethical  issues such as security and privacy of research participants, and analysis of  gathered data. With these issues in mind, we set eight additional goals for ContextLogger2:   
+</p>
+<ol>
+<li>Maximum market coverage 
+
+</li>
+<li>Extensibility with new sensors 
+
+</li>
+<li>Rapid deployment 
+
+</li>
+<li>Real-time monitoring and control 
+
+</li>
+<li>Communications efficiency 
+
+</li>
+<li>Privacy of personal data 
+
+</li>
+<li>Scalability with increasing number of  participants 
+
+</li>
+<li>Compatibility with data standards 
+</li>
+</ol>
+
+<p>
+Needless to say, the goals for ContextLogger2 are very ambitious! Thus far some of the them have been met better than others. 
+</p>
+<a id="toc3" name="toc3"></a>
+<h1>3. Current Solution</h1>
+<p>
+The current ContextLogger2 codebase contains everything required for deployment on Symbian S60 3rd edition and higher (up to Symbian^3), which in 2010 accounted for 44.3 percent of the smartphone market. Work on Android support has been started to retain reasonably large coverage in the fast-paced mobile market.
+</p>
+<p>
+An ideal logger would work on every smartphone model, thus minimizing the costs of buying new devices to participants and, on the other hand, increasing realism. This, however, is hardly realistic in the current fragmented market. In creating ContextLogger2 we have instead merely sought not to exclude <em>developers</em> based on the platforms they target, the libraries they have available, or the tools they are using.
+</p>
+<p>
+What we envision is a “logger construction kit” that strives for portability by providing basic plumbing like build and runtime configuration facilities and a data persistence and transport layer, either implemented fairly portably, or with multiple different implementations to choose from (to cater for different event systems and API availability and such). Developers are then left with more time to focus on platform integration, and on implementing sensors in any language capable of exporting functions in a C or C++ compatible way. Most of the sensors in the current codebase are Symbian C++, but we've recently added some Qt Mobility API based sensors implementations not depending on Symbian.
+</p>
+<p>
+It is also possible to use dynamic code wherever desired in the logger due to the embedded Lua runtime. We, however, presently only use Lua for portable implementation of configuration files, as well as a basis of a protocol for querying status information and for changing dynamic parameters. An SQLite v3 database engine is used to implement persistence functions portably, without platform specific persistence APIs.
+</p>
+<hr class="light" />
+<p>
+<a href="http://hiit.fi/u/oulasvir/">Antti Oulasvirta</a>, <a href="http://hiit.fi/u/hasu/">Tero Hasu</a>
+</p>
+
+<!-- xhtml code generated by txt2tags 2.5 (http://txt2tags.sf.net) -->
+<!-- cmdline: txt2tags -\-target xhtml -\-infile homepage/intro.txt2tags.txt -\-outfile contextlogger2/intro.html -\-encoding utf-8 -C homepage/config.t2t -->
+</body></html>
