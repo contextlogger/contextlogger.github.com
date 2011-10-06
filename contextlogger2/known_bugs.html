@@ -10,7 +10,7 @@
 <body><table class="navi"><tr><th>Go to</th></td><tr><td><a href="../index.html">CL2</a></td></tr><tr><td><a href="http://hiit.fi/uix/">UIx</a></td></tr><tr><td><a href="http://hiit.fi/">HIIT</a></td></tr></table>
 <div align="center">
 <h1>ContextLogger2 Defects and Feature Requests</h1>
-<h3>Tue Jul 12 20:47:18 2011</h3>
+<h3>Wed Oct  5 23:40:17 2011</h3>
 </div>
 
 <h1>1. Bug Reports and Feature Requests</h1>
@@ -19,9 +19,6 @@ To report a bug or to request a feature, either send email or use the <a href="h
 </p>
 <h1>2. Known Defects Specific to Symbian</h1>
 <ul>
-<li>Should only attempt to <b>create tables</b> if the <code>status_log</code> table does not already exist. (The particular table should always exist if any tables have been created.)
-
-</li>
 <li>The <b>Qt-based</b> uploader does not have <b>IAP selection</b> code for Symbian, which it really should have to honor roaming settings etc. Although things work quite well without on Symbian^3, which tends to be more automatic when it comes to creating connections. <code>QNetworkConfigurationManager</code> does not appear to currently list any configurations on Symbian^3, which may be a bug in Qt. (It would appear to list something with newer versions of Qt, so this defect may now be easier to fix.)
 
 </li>
